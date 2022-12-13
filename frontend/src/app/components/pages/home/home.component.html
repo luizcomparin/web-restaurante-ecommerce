@@ -1,0 +1,55 @@
+<ul class="flex p-0 justify-center items-center flex-wrap list-none ">
+	<li *ngFor="let food of foods">
+		<a routerLink="/food/{{ food.id }}"
+			class=" flex flex-col h-[24rem] w-80 m-2 border-[1px] rounded-2xl overflow-hidden text-[#e72929] hover:opacity-90 cursor-pointer ">
+			<img [src]="food.imageUrl" [alt]="food.name" class="object-cover h-[14.5rem] " />
+			<div class="mt-[0.3rem] py-2 px-4 relative h-28 ">
+				<!--content-->
+				<div class="name">
+					{{ food.name }}
+				</div>
+
+				<span class="absolute top-2 right-4 text-[1.2rem] {{ food.favorite ? '' : 'text-[grey]' }}">
+					<!--favorite-->
+					❤
+				</span>
+
+				<div class="mb-[0.2rem]">
+					<!--stars-->
+					<star-rating
+						[value]="food.stars"
+						[totalstars]="5"
+						checkedcolor="red"
+						uncheckedcolor="black"
+						size="22px"
+						[readonly]="true"></star-rating>
+				</div>
+
+				<div class="flex justify-between items-start ">
+					<!--product-item-footer-->
+					<div class="flex-[9] ">
+						<!--origins-->
+						<span *ngFor="let origin of food.origins"
+							class="rounded-full bg-[whitesmoke] inline-block text-[0.8rem] text-[grey] mr-[0.3rem] py-0 px-2 mt-[0.2rem] ">
+							{{ origin }}
+						</span>
+					</div>
+
+					<div class="text-[0.9rem] flex-[3] text-right ">
+						<!--cook-time-->
+						<span>🕒</span>
+						{{ food.cookTime }}
+					</div>
+				</div>
+
+				<div class=" bottom-0 left-[0.9rem] bg-white text-[#414141] mt-[0.7rem] text-[1.1rem] pt-[0.3rem] pr-[100%] pb-0 pl-0 ">
+					<!--price-->
+					<span>
+						{{ food.price | currency }}
+					</span>
+				</div>
+
+			</div>
+		</a>
+	</li>
+</ul>
