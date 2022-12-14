@@ -1,7 +1,9 @@
+<app-search></app-search>
+<app-tags></app-tags>
 <ul class="flex p-0 justify-center items-center flex-wrap list-none ">
 	<li *ngFor="let food of foods">
 		<a routerLink="/food/{{ food.id }}"
-			class=" flex flex-col h-[24rem] w-80 m-2 border-[1px] rounded-2xl overflow-hidden text-[#e72929] hover:opacity-90 cursor-pointer ">
+			class=" flex flex-col h-[24rem] w-80 m-2 border-[1px] rounded-2xl overflow-hidden text-primary hover:opacity-90 cursor-pointer ">
 			<img [src]="food.imageUrl" [alt]="food.name" class="object-cover h-[14.5rem] " />
 			<div class="mt-[0.3rem] py-2 px-4 relative h-28 ">
 				<!--content-->

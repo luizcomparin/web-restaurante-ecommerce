@@ -1,0 +1,67 @@
+<div class=" flex justify-center items-center min-w-[25rem] flex-wrap m-12 [&>*]:max-w-[40rem] ">
+	<!--container -->
+	<img [src]="food.imageUrl" [alt]="food.name"
+		class="  h-[35rem] m-4 rounded-[3rem] flex-grow flex-shrink-0 object-cover " />
+
+	<div class="w-full flex flex-col flex-grow-0 flex-shrink-0 p-8 text-black ml-4 ">
+		<!--details-->
+		<div class="flex justify-between ">
+			<!--header-->
+			<span class="text-[2rem] font-bold ">
+				<!--name-->
+				{{ food.name }}
+			</span>
+
+			<span class=" {{ food.favorite ? 'text-primary text-[2.5rem]' : 'text-[grey]' }} ">
+				<!--favorite-->
+				❤
+			</span>
+		</div>
+
+		<div>
+			<!--rating-->
+			<star-rating
+				[value]="food.stars"
+				[totalstars]="5"
+				checkedcolor="red"
+				uncheckedcolor="black"
+				size="25px"
+				[readonly]="true">
+			</star-rating>
+		</div>
+
+		<div class="flex flex-wrap my-4 mx-0 ">
+			<!--origins-->
+			<span *ngFor="let origin of food.origins"
+				class="p-2 text-[1.2rem] m-2 ml-0 rounded-[2rem] bg-[aliceblue] ">
+				{{origin}}
+			</span>
+		</div>
+
+		<div class="flex flex-wrap">
+			<!--tags-->
+			<a *ngFor="let tag of food.tags" routerLink="/tag/{{ tag }}"
+				class="py-[0.3rem] px-4 my-[0.2rem] mx-[0.15rem] rounded-full font-semibold text-primary bg-[#f0f0f0] ">
+				{{ tag }}
+			</a>
+		</div>
+
+		<div class="mt-4">
+			<!--cook-time-->
+			<span class="rounded-full text-[1.3rem] pt-[0.6rem] pr-8 pb-[0.6rem] pl-0 ">
+				Time to cook about <strong>{{ food.cookTime }}</strong> minutes
+			</span>
+		</div>
+
+		<div class="text-[1.8rem] m-8 ml-0 text-green-500 before:content-['Price: '] before:text-[grey] ">
+			<!--price-->
+			<span>
+				{{ food.price | currency }}
+			</span>
+		</div>
+
+		<button class=" text-white bg-primary border-none text-[1.2rem] p-4 rounded-full outline-none hover:opacity-90 cursor-pointer ">
+			Add to cart
+		</button>
+	</div>
+</div>
