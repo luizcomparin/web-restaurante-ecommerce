@@ -1,0 +1,7 @@
+<div *ngIf="visible"
+	class="flex items-center justify-center flex-col text-2xl font-thin h-[15rem]">
+	{{ notFoundMessage }}
+	<a [routerLink]="resetLinkRoute"
+		class="text-[1.1rem] bg-primary text-white rounded-full py-[0.7rem] px-4 m-4 opacity-80 hover:opacity-100 cursor-pointer">
+		{{ resetLinkText }}</a>
+</div>

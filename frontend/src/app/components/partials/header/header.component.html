@@ -20,7 +20,10 @@
 				</li>
 				<li>
 					<a routerLink="/cart-page">
-						Carrinho <span class="bg-[#ff4d4d] text-white py-[0.1rem] px-[0.45rem] rounded-full ">3</span>
+						Carrinho
+						<span *ngIf="cartQuantity" class="bg-[#ff4d4d] text-white py-[0.1rem] px-[0.45rem] rounded-full ">
+							{{cartQuantity}}
+						</span>
 					</a>
 				</li>
 			</ul>

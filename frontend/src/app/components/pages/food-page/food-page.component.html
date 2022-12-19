@@ -1,4 +1,9 @@
-<div class=" flex justify-center items-center min-w-[25rem] flex-wrap m-12 [&>*]:max-w-[40rem] ">
+<app-not-found
+	[visible]="!food.id"
+	notFoundMessage="Prato não encontrado."
+	resetLinkText="Voltar ao menu"></app-not-found>
+
+<div *ngIf="food.id" class=" flex justify-center items-center min-w-[25rem] flex-wrap m-12 [&>*]:max-w-[40rem] ">
 	<!--container -->
 	<img [src]="food.imageUrl" [alt]="food.name"
 		class="  h-[35rem] m-4 rounded-[3rem] flex-grow flex-shrink-0 object-cover " />
@@ -53,14 +58,15 @@
 			</span>
 		</div>
 
-		<div class="text-[1.8rem] m-8 ml-0 text-green-500 before:content-['Price: '] before:text-[grey] ">
+		<div class="text-[1.8rem] m-8 ml-0 text-green-500">
 			<!--price-->
+			<span class="text-[grey]">Price: </span>
 			<span>
 				{{ food.price | currency }}
 			</span>
 		</div>
 
-		<button class=" text-white bg-primary border-none text-[1.2rem] p-4 rounded-full outline-none hover:opacity-90 cursor-pointer ">
+		<button (click)="addToCart()" class=" text-white bg-primary border-none text-[1.2rem] p-4 rounded-full outline-none hover:opacity-90 cursor-pointer ">
 			Add to cart
 		</button>
 	</div>

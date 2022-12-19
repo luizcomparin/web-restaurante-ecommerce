@@ -1,5 +1,9 @@
 <app-search></app-search>
 <app-tags></app-tags>
+<app-not-found
+	[visible]="!foods || !foods.length"
+	resetLinkText="Voltar ao menu"></app-not-found>
+
 <ul class="flex p-0 justify-center items-center flex-wrap list-none ">
 	<li *ngFor="let food of foods">
 		<a routerLink="/food/{{ food.id }}"

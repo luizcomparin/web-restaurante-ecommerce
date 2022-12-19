@@ -1,0 +1,7 @@
+li div {
+	padding: 1rem;
+}
+
+li div:not(:first-child){
+	flex-basis: 18%;
+}
