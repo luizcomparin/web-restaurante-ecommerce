@@ -1,9 +1,9 @@
 <app-not-found
-	[visible]="!food.id"
+	[visible]="!food"
 	notFoundMessage="Prato não encontrado."
 	resetLinkText="Voltar ao menu"></app-not-found>
 
-<div *ngIf="food.id" class=" flex justify-center items-center min-w-[25rem] flex-wrap m-12 [&>*]:max-w-[40rem] ">
+<div *ngIf="food" class=" flex justify-center items-center min-w-[25rem] flex-wrap m-12 [&>*]:max-w-[40rem] ">
 	<!--container -->
 	<img [src]="food.imageUrl" [alt]="food.name"
 		class="  h-[35rem] m-4 rounded-[3rem] flex-grow flex-shrink-0 object-cover " />
