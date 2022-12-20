@@ -5,17 +5,17 @@
 		<!--logo-->
 		<nav>
 			<ul>
-				<li>
+				<li *ngIf="!isAuth">
 					<a routerLink="/login">Login</a>
 				</li>
-				<li class="relative group ">
+				<li *ngIf="isAuth" class="relative group ">
 					<!-- menu-container -->
-					<a routerLink="/dashboard">Luiz</a>
+					<a routerLink="/dashboard">{{ user.name }}</a>
 					<div class="menu absolute z-[1] bg-[#F5F5F5] hidden group-hover:block ">
 						<!--menu-->
 						<a routerLink="/profile">Perfil</a>
 						<a routerLink="/orders">Pedidos</a>
-						<a>Logout</a>
+						<a (click)="logout()">Logout</a>
 					</div>
 				</li>
 				<li>
