@@ -1,0 +1,15 @@
+<div class="flex justify-center w-full">
+	<!--container-->
+	<button
+		class="h-14 border-none outline-none font-thin rounded-xl w-full my-4 mx-auto opacity-80 hover:opacity-100 cursor-pointer"
+		[ngStyle]="{
+			color:color,
+			'background-color':bgColor,
+			'font-size.rem':fontSizeRem,
+			'width.rem':widthRem
+		}"
+		[type]="type"
+		(click)="onClick.emit()">
+		{{ text }}
+	</button>
+</div>

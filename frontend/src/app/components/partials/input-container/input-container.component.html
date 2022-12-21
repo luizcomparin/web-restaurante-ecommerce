@@ -1,0 +1,12 @@
+<div [ngStyle]="{'background-color': bgColor}"
+	class="relative mb-2 pt-[0.3rem] border-[1px] border-[#e0e0e0] rounded-xl ">
+	<!--container-->
+	<label class="inline-block ml-2 text-base text-[#5f5f5f]">
+		{{ label }}
+	</label>
+
+	<div class="flex h-[2.7rem] items-center py-0 px-2">
+		<!--content-->
+		<ng-content></ng-content>
+	</div>
+</div>

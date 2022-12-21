@@ -4,37 +4,25 @@
 		<!--details-->
 		<app-title title="Login"></app-title>
 
-		<form [formGroup]="loginForm" (ngSubmit)="submit()"
-			class="flex flex-col justify-center">
-			<div class="">
-				<!--input-container-->
-				<label>Email</label>
-				<div>
-					<input type="email" placeholder="Email" formControlName="email" />
-				</div>
+		<form [formGroup]="loginForm" (ngSubmit)="submit()" class="flex flex-col justify-center">
 
-				<div class="error-list" *ngIf="fc.email.errors && isSubmitted">
-					<div *ngIf="fc.email.errors.required">Não pode estar vazio</div>
-					<div *ngIf="fc.email.errors.email">O Email está incorreto</div>
-				</div>
-			</div>
+			<text-input
+				[control]="fc.email"
+				[showErrorsWhen]="isSubmitted"
+				type="email"
+				label="Email">
+			</text-input>
 
-			<div class="">
-				<!--input-container-->
-				<label>Password</label>
-				<div>
-					<input type="password" placeholder="Password" formControlName="password" />
-				</div>
+			<text-input
+				[control]="fc.password"
+				[showErrorsWhen]="isSubmitted"
+				type="password"
+				label="Password">
+			</text-input>
 
-				<div class="error-list" *ngIf="fc.password.errors && isSubmitted">
-					<div *ngIf="fc.password.errors.required">Não pode estar vazio</div>
-				</div>
-			</div>
 
-			<div class="">
-				<!--button-->
-				<button type="submit">Login</button>
-			</div>
+
+			<default-button text="Login"></default-button>
 
 		</form>
 	</div>

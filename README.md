@@ -85,6 +85,7 @@
     11. Add HTTPCLIENT module
     12. Update food service
 12. Login Page
+
     1. Generate component
         1. Add to routes
         2. Add TS
@@ -109,3 +110,9 @@
         4. Add Local Storage methods
         5. Add Logout method
             1. Add to Header
+
+13. Make components for Login Page
+    1. Input container
+    2. Input validation
+    3. Text Input
+    4. Default button
