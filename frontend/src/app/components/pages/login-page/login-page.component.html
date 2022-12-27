@@ -23,6 +23,14 @@
 
 
 			<default-button text="Login"></default-button>
+			<div class="flex justify-center items-center">
+				<!--register-->
+				Não tem uma conta? &nbsp;
+				<a routerLink="/register" [queryParams]="{returnUrl: returnUrl}"
+					class="text-primary hover:font-semibold">
+					Criar nova conta
+				</a>
+			</div>
 
 		</form>
 	</div>

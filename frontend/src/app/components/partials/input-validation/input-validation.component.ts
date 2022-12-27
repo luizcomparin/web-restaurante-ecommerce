@@ -1,15 +1,11 @@
-import {
-	Component,
-	Input,
-	OnChanges,
-	OnInit,
-	SimpleChanges,
-} from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 
 const VALIDATORS_MESSAGES: any = {
 	required: 'O campo não pode estar vazio',
-	email: 'Insira um email válido',
+	email: 'Email inválido',
+	minlength: 'Insira mais caracteres',
+	notMatch: 'A senha está diferente',
 };
 
 @Component({
@@ -33,14 +29,16 @@ export class InputValidationComponent implements OnInit, OnChanges {
 		});
 	}
 
-	ngOnChanges(changes: SimpleChanges): void {
+	ngOnChanges(): void {
 		this.checkValidation();
 	}
 
 	checkValidation() {
 		const errors = this.control.errors;
+		console.log(this.errorMessages);
 		if (!errors) {
 			this.errorMessages = [];
+
 			return;
 		}
 

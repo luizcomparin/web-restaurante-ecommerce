@@ -1,0 +1,52 @@
+<div class="flex justify-center items-center h-full mt-12">
+	<!--container-->
+	<div class="w-[25rem]">
+		<!--details-->
+		<app-title title="Register"></app-title>
+		<form [formGroup]="registerForm" (ngSubmit)="submit()">
+			<text-input
+				[control]="fc.name"
+				[showErrorsWhen]="isSubmitted"
+				label="Nome">
+			</text-input>
+
+			<text-input
+				[control]="fc.email"
+				[showErrorsWhen]="isSubmitted"
+				label="Email"
+				type="email">
+			</text-input>
+
+			<text-input
+				[control]="fc.password"
+				[showErrorsWhen]="isSubmitted"
+				label="Senha"
+				type="password">
+			</text-input>
+
+			<text-input
+				[control]="fc.confirmPassword"
+				[showErrorsWhen]="isSubmitted"
+				label="Confirmar Senha"
+				type="password">
+			</text-input>
+
+			<text-input
+				[control]="fc.address"
+				[showErrorsWhen]="isSubmitted"
+				label="Endereço">
+			</text-input>
+
+			<default-button text="Criar conta"></default-button>
+
+			<div class="flex justify-center items-center">
+				<!--login-->
+				Já tem uma conta? &nbsp;
+				<a routerLink="/login" [queryParams]="{returnUrl: returnUrl}"
+					class="text-primary hover:font-semibold">
+					Fazer login
+				</a>
+			</div>
+		</form>
+	</div>
+</div>

@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
+import { InputValidationComponent } from '../input-validation/input-validation.component';
 
 @Component({
 	selector: 'text-input',

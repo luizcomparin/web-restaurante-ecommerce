@@ -85,7 +85,6 @@
     11. Add HTTPCLIENT module
     12. Update food service
 12. Login Page
-
     1. Generate component
         1. Add to routes
         2. Add TS
@@ -110,9 +109,29 @@
         4. Add Local Storage methods
         5. Add Logout method
             1. Add to Header
-
 13. Make components for Login Page
     1. Input container
     2. Input validation
     3. Text Input
     4. Default button
+14. Connect Login API to MongoDB Atlas
+    1. Moving APIs into routers
+    2. Create MongoDB Atlas
+    3. Create .env file
+    4. Install
+        1. mongoose
+        2. dotenv
+        3. bcryptjs
+        4. express-async-handler
+    5. Connect to MongoDB Atlas
+    6. Use MongoDB instead of data.ts in APIs
+15. Register User
+    1. Add Register API
+    2. Add Register service method
+    3. Add Register link
+    4. Add Register Component
+16. Loading!
+    1. Add Image
+    2. Add Component
+    3. Add Service
+    4. Add Interceptor
