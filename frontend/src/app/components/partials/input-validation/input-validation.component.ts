@@ -35,10 +35,8 @@ export class InputValidationComponent implements OnInit, OnChanges {
 
 	checkValidation() {
 		const errors = this.control.errors;
-		console.log(this.errorMessages);
 		if (!errors) {
 			this.errorMessages = [];
-
 			return;
 		}
 

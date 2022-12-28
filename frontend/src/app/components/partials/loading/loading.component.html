@@ -1,1 +1,10 @@
-<p>loading works!</p>
+<div *ngIf="isLoading"
+	class="fixed w-full h-full bg-[#ffffffea] z-[10000] top-0 left-0">
+	<!--container-->
+	<div class="flex flex-col items-center justify-center h-[80%] w-full">
+		<!--details-->
+		<img class="w-[200px] h-[200px]" src="/assets/loading.svg" />
+		<span class="w-[200px] h-[10px] bg-[#e15b64] rounded-full mb-3"></span>
+		<h1 class="text-[#e15b64] font-bold text-xl">Carregando...</h1>
+	</div>
+</div>
