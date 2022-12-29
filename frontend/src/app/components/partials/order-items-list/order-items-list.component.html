@@ -1,0 +1,43 @@
+<table class="w-full border-[1px] mt-4 rounded-md py-2 px-4 ">
+	<tr>
+		<td colspan="5">
+			<h3 class="mt-2 ml-1 text-gray-500 ">Itens do pedido:</h3>
+		</td>
+	</tr>
+	<tr *ngFor="let item of order.items">
+		<td>
+			<a routerLink="/food/{{ item.food.id }}" class="hover:opacity-90">
+				<img [src]="item.food.imageUrl" class="w-12 h-12 object-cover rounded-full " />
+			</a>
+		</td>
+		<td>
+			{{ item.food.name }}
+		</td>
+		<td>
+			<!--Price of the unitary food-->
+			{{ item.food.price | currency }}
+		</td>
+		<td>
+			<!--Quantity of a single item-->
+			{{ item.quantity }}
+		</td>
+		<td>
+			<!--Unitary food mutiplied by it's quantity (total price by food)-->
+			{{ item.price | currency }}
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3"></td>
+		<td>
+			<strong>
+				Total:
+			</strong>
+		</td>
+		<td>
+			<strong>
+				<!--Total price of order-->
+				{{ order.totalPrice | currency }}
+			</strong>
+		</td>
+	</tr>
+</table>

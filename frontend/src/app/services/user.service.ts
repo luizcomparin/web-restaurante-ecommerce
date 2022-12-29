@@ -25,6 +25,10 @@ export class UserService {
 		this.userObservable = this.userSubject.asObservable();
 	}
 
+	public get currentUser(): User {
+		return this.userSubject.value;
+	}
+
 	login(userLogin: IUserLogin): Observable<User> {
 		return this.http.post<User>(USER_LOGIN_URL, userLogin).pipe(
 			tap({
@@ -33,7 +37,7 @@ export class UserService {
 					this.userSubject.next(user);
 					this.toastrService.success(
 						`Bem vindo ao FaceBurguer ${user.name}!`,
-						`FaceBurguer ${user.token}!`
+						`Login realizado.`
 					);
 				},
 				error: (errorResponse) => {
@@ -60,7 +64,7 @@ export class UserService {
 				error: (errorResponse) => {
 					this.toastrService.error(
 						errorResponse.error,
-						'Register Failed'
+						'Cadastro mal sucedido.'
 					);
 				},
 			})

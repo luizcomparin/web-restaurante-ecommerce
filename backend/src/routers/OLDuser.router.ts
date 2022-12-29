@@ -26,12 +26,12 @@ router.get(
 router.post(
 	"/login",
 	asyncHandler(async (req, res) => {
+		// Destructuring Assignment
 		const { email, password } = req.body;
-		// Destructuring assignment
-		const user = await UserModel.findOne({ email });
+		const user = await UserModel.findOne({ email, password });
 
-		if (user && (await bcrypt.compare(password, user.password))) {
-			res.send(generateTokenReponse(user));
+		if (user) {
+			res.send(generateTokenResponse(user));
 		} else {
 			res.status(HTTP_BAD_REQUEST).send("Usuário ou senha inválidos.");
 		}
@@ -61,31 +61,24 @@ router.post(
 		};
 
 		const dbUser = await UserModel.create(newUser);
-		res.send(generateTokenReponse(dbUser));
+		res.send(generateTokenResponse(dbUser));
 	})
 );
 
-const generateTokenReponse = (user: User) => {
+const generateTokenResponse = (user: any) => {
 	const token = jwt.sign(
 		{
-			id: user.id,
 			email: user.email,
 			isAdmin: user.isAdmin,
 		},
-		process.env.JWT_SECRET!,
+		"SomeRandomText",
 		{
 			expiresIn: "30d",
 		}
 	);
 
-	return {
-		id: user.id,
-		email: user.email,
-		name: user.name,
-		address: user.address,
-		isAdmin: user.isAdmin,
-		token: token,
-	};
+	user.token = token;
+	return user;
 };
 
 export default router;
