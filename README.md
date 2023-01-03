@@ -164,3 +164,25 @@
         6. Add Order Service
             1. Add create Method
         7. Add Auth Interceptor
+18. Payment Page
+    1. Generate component
+    2. Add 'getOrderForCurrentUser' API
+    3. Add Order Service method
+    4. Connect component to Service
+    5. Make the map component readonly
+19. Adding Paypal
+    1. Generate component
+        1. Add to payment page
+    2. Get Paypal client ID
+    3. Add Paypal JS to index.html
+    4. Set up Paypal button
+    5. Add Pay API to order router
+    6. Get Paypal sandbox account
+20. Order Track page
+    1. Generate component
+        1. Add to routes
+    2. Add API
+        1. Add to urls.ts
+    3. Add method to order.service
+    4. Add HTML
+    5. Add CSS

@@ -1,0 +1,33 @@
+<div class="flex mt-0 mx-8 mb-24 flex-wrap justify-center ">
+	<!--container-->
+	<div class="flex flex-col w-[35rem] mr-12 ">
+		<!--content-->
+		<app-title title="Resumo do pedido" fontSize="1.6rem"></app-title>
+		<div>
+			<!--summary-->
+			<div class="flex mt-[0.7rem] ">
+				<h3 class="mr-4 basis-20"> Nome: </h3>
+				<span class="text-[1.2rem] ">{{ order.name }}</span>
+			</div>
+			<div class="flex mt-[0.7rem] ">
+				<h3 class="mr-4 basis-20"> Endereço: </h3>
+				<span class="text-[1.2rem] ">{{ order.address }}</span>
+			</div>
+		</div>
+		<order-items-list [order]="order"></order-items-list>
+	</div>
+	<div>
+		<!--map-->
+		<app-title title="Endereço de envio" fontSize="1.6rem"></app-title>
+		<map [order]="order" [readonly]="true"></map>
+	</div>
+	<div class="flex basis-full justify-center">
+		<!--buttons-container-->
+		<div class="m-8 w-[35rem] ">
+			<!--buttons-->
+			<paypal-button [order]="order">
+
+			</paypal-button>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,23 @@
+<div class="mt-4 flex justify-center flex-wrap ">
+	<!--container-->
+	<div *ngIf="order" class="flex flex-col w-full max-w-[35rem] mr-4 ">
+		<!--content-->
+		<!-- <h1>Pedido #{{ order.id }}</h1> -->
+		<app-title title="Pedido #{{ order.id }}" class="font-bold"></app-title>
+		<div class="details">
+			<!--details-->
+			<div><strong>Data</strong> {{ order.createdAt | date:'medium' }} </div>
+			<div><strong>Nome</strong> {{ order.name }} </div>
+			<div><strong>Endereço</strong> {{ order.address }} </div>
+			<div><strong>Status</strong> {{ order.status }} </div>
+			<div *ngIf="order.paymentId"><strong>ID Pagamento</strong> {{ order.paymentId }} </div>
+		</div>
+
+		<order-items-list [order]="order"></order-items-list>
+	</div>
+
+	<div>
+		<app-title title="Endereço de envio"></app-title>
+		<map [order]="order" [readonly]="true"></map>
+	</div>
+</div>

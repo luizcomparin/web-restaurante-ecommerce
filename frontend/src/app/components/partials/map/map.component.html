@@ -1,6 +1,6 @@
 <div class="relative w-[35rem] h-[22rem] text-center ">
 	<!--container-->
-	<button (click)="findMyLocation()"
+	<button *ngIf="!readonly" (click)="findMyLocation()"
 		class="absolute m-auto mt-2 w-[15rem] min-h-12 text-[1.1rem] top-0 left-0 right-0 border border-slate-400 z-[1000] bg-[#ffffff7c] hover:bg-white ">
 		<!--find-location-->
 		Encontrar minha localização
