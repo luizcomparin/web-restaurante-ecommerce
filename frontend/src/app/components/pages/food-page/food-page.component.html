@@ -3,7 +3,7 @@
 	notFoundMessage="Prato não encontrado."
 	resetLinkText="Voltar ao menu"></app-not-found>
 
-<div *ngIf="food" class=" flex justify-center items-center min-w-[25rem] flex-wrap m-12 [&>*]:max-w-[40rem] ">
+<div *ngIf="food" class=" flex justify-center items-center min-w-[25rem] flex-wrap my-12 [&>*]:max-w-[40rem] ">
 	<!--container -->
 	<img [src]="food.imageUrl" [alt]="food.name"
 		class="  h-[35rem] m-4 rounded-[3rem] flex-grow flex-shrink-0 object-cover " />
@@ -54,20 +54,20 @@
 		<div class="mt-4">
 			<!--cook-time-->
 			<span class="rounded-full text-[1.3rem] pt-[0.6rem] pr-8 pb-[0.6rem] pl-0 ">
-				Time to cook about <strong>{{ food.cookTime }}</strong> minutes
+				Tempo de preparo <strong>{{ food.cookTime }}</strong> minutos
 			</span>
 		</div>
 
 		<div class="text-[1.8rem] m-8 ml-0 text-green-500">
 			<!--price-->
-			<span class="text-[grey]">Price: </span>
+			<span class="text-[grey]">Preço: </span>
 			<span>
 				{{ food.price | currency }}
 			</span>
 		</div>
 
 		<button (click)="addToCart()" class=" text-white bg-primary border-none text-[1.2rem] p-4 rounded-full outline-none hover:opacity-90 cursor-pointer ">
-			Add to cart
+			Adicionar ao carrinho
 		</button>
 	</div>
 </div>

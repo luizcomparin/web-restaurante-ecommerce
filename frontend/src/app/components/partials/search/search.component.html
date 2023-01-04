@@ -1,8 +1,10 @@
 <div class="flex justify-center mt-12 mb-6">
-	<input #s type="text" placeholder="Pesquisar"
+	<input #s type="text" placeholder="Buscar prato"
 		(keyup.enter)="search(s.value)"
 		[value]="searchTerm"
 		class="w-80 h-12 bg-[#f1f1f1] p-[1.2rem] text-base font-medium outline-none border-none rounded-tl-full rounded-tr-none rounded-br-none rounded-bl-full" />
 	<button (click)="search(s.value)"
-		class="w-20 h-12 text-base text-white opacity-80 hover:opacity-100 cursor-pointer outline-none bg-primary border-none rounded-tl-none rounded-tr-full rounded-br-full rounded-bl-none ">Search</button>
+		class="w-20 h-12 text-base text-white opacity-80 hover:opacity-100 cursor-pointer outline-none bg-primary border-none rounded-tl-none rounded-tr-full rounded-br-full rounded-bl-none ">
+		Buscar
+	</button>
 </div>

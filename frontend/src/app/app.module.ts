@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
@@ -30,6 +30,10 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { PaymentPageComponent } from './components/pages/payment-page/payment-page.component';
 import { PaypalButtonComponent } from './components/partials/paypal-button/paypal-button.component';
 import { OrderTrackPageComponent } from './components/pages/order-track-page/order-track-page.component';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+
+registerLocaleData(localePt, 'pt');
 
 @NgModule({
 	declarations: [
@@ -52,9 +56,9 @@ import { OrderTrackPageComponent } from './components/pages/order-track-page/ord
 		CheckoutPageComponent,
 		OrderItemsListComponent,
 		MapComponent,
-  PaymentPageComponent,
-  PaypalButtonComponent,
-  OrderTrackPageComponent,
+		PaymentPageComponent,
+		PaypalButtonComponent,
+		OrderTrackPageComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -79,6 +83,14 @@ import { OrderTrackPageComponent } from './components/pages/order-track-page/ord
 			provide: HTTP_INTERCEPTORS,
 			useClass: LoadingInterceptor,
 			multi: true,
+		},
+		{
+			provide: LOCALE_ID,
+			useValue: 'pt',
+		},
+		{
+			provide: DEFAULT_CURRENCY_CODE,
+			useValue: 'BRL',
 		},
 	],
 	bootstrap: [AppComponent],

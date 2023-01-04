@@ -1,7 +1,7 @@
 export enum OrderStatusEnum {
-	NEW = "NEW",
-	PAYED = "PAYED",
-	SHIPPED = "SHIPPED",
-	CANCELED = "CANCELED",
-	REFUNDED = "REFUNDED",
+	NEW = "Novo pedido",
+	PAYED = "Pagamento aprovado",
+	SHIPPED = "Pedido enviado",
+	CANCELED = "Pedido cancelado",
+	REFUNDED = "Pagamento estornado",
 }
