@@ -8,46 +8,59 @@
 <div *ngIf="cart && cart.items.length"
 	class="flex flex-wrap items-start m-6 mt-2">
 	<!--container-->
-	<ul class="flex flex-col flex-grow-[3] flex-shrink-0 justify-evenly border-[1px] border-solid border-[#ffbbbb] rounded-2xl list-none m-2 p-0 ">
-		<li *ngFor="let cartItem of cart.items"
-			class="flex justify-around items-center flex-wrap border-b-[1px] border-[#e4e4e4] last:border-none">
-			<div>
-				<img [src]="cartItem.food.imageUrl" [alt]="cartItem.food.name"
-					class="w-20 h-20 rounded-full object-cover " />
-			</div>
+	<div class="flex flex-col flex-grow-[3] flex-shrink-0 justify-evenly">
 
-			<div>
-				<a routerLink="/food/{{ cartItem.food.id }}">
-					{{cartItem.food.name}}
-				</a>
-			</div>
 
-			<div>
-				<select #quantitySelect
-					[value]="cartItem.quantity"
-					(change)="changeQuantity(cartItem, quantitySelect.value)"
-					class="w-12 outline-none border-b-[1px] border-[lightgrey] text-[1.1rem] font-thin ">
-					<option>1</option>
-					<option>2</option>
-					<option>3</option>
-					<option>4</option>
-					<option>5</option>
-				</select>
-			</div>
+		<ul class="flex flex-col flex-grow-[3] flex-shrink-0 justify-evenly border-[1px] border-solid border-[#ffbbbb] rounded-2xl list-none m-2 p-0 ">
+			<li *ngFor="let cartItem of cart.items"
+				class="flex justify-around items-center flex-wrap border-b-[1px] border-[#e4e4e4] last:border-none">
+				<div>
+					<img [src]="cartItem.food.imageUrl" [alt]="cartItem.food.name"
+						class="w-20 h-20 rounded-full object-cover " />
+				</div>
 
-			<div>
-				{{ cartItem.price | currency }}
-			</div>
+				<div>
+					<a routerLink="/food/{{ cartItem.food.id }}">
+						{{cartItem.food.name}}
+					</a>
+				</div>
 
-			<div>
-				<button (click)="removeFromCart(cartItem)"
-					class="rounded-2xl border-none p-2 bg-primary/5 text-primary opacity-70 outline-none hover:opacity-100 cursor-pointer ">
-					<!--remove-button-->
-					Remover
-				</button>
-			</div>
-		</li>
-	</ul>
+				<div>
+					<select #quantitySelect
+						[value]="cartItem.quantity"
+						(change)="changeQuantity(cartItem, quantitySelect.value)"
+						class="w-12 outline-none border-b-[1px] border-[lightgrey] text-[1.1rem] font-thin ">
+						<option>1</option>
+						<option>2</option>
+						<option>3</option>
+						<option>4</option>
+						<option>5</option>
+					</select>
+				</div>
+
+				<div>
+					{{ cartItem.price | currency }}
+				</div>
+
+				<div>
+					<button (click)="removeFromCart(cartItem)"
+						class="rounded-2xl border-none p-2 bg-primary/5 text-primary opacity-70 outline-none hover:opacity-100 cursor-pointer ">
+						<!--remove-button-->
+						Remover
+					</button>
+				</div>
+			</li>
+		</ul>
+
+		<!-- <default-button type="button" text="Adicionar mais itens" fontSizeRem="1" onclick="">
+
+		</default-button> -->
+
+		<a routerLink="/"
+			class="p-4 text-white flex right-0 left-0 m-auto justify-self-center bg-primary  w-[15rem] rounded-2xl text-center opacity-70 justify-center hover:opacity-100 cursor-pointer ">
+			Adicionar mais itens
+		</a>
+	</div>
 
 	<div class="flex flex-col justify-between items-center flex-grow flex-shrink-[3] h-[20rem] border-[1px] border-[#ffbbbb] rounded-2xl p-2 m-2">
 		<!--checkout-->

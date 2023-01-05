@@ -1,188 +1,153 @@
-## Lessons
+# FaceBurguer
 
-1. Introduction to the course
-2. Install development tools
-3. Create Angular App
-    1. Create project's folder
-    2. Install @angular/cli
-    3. Create App as frontend
-    4. Install TailwindCSS in frontend app folder
-4. Add Header
-    1. Generate Component
-    2. Add HTML
-    3. Add CSS
-5. List Foods
-    1. Create Food model
-    2. Create data.ts
-       Add sample foods
-    3. Add images to assets
-    4. Create Food service
-    5. Create Home component
-        1. Add TS
-        2. Add HTML
-        3. Add CSS
-6. Search
-    1. Add method to Food service
-    2. Add search route
-    3. Show search result in Home component
-    4. Generate search component
-        1. Add to home component
-        2. Add TS
-        3. Add HTML
-        4. Add CSS
-7. Tags Bar
-    1. Create Tag model
-    2. Add smaple tags to data.ts
-    3. Food service
-        1. Add get all tags method
-        2. Add get all foods by tag method
-    4. Add tags route
-    5. Show tag result in Home Component
-    6. Generate Tags component
-        1. Add to Home Component
-        2. Add TS
-        3. Add HTML
-        4. Add CSS
-8. Food Page
-    1. Add method to food service
-    2. Generate Food Page component
-        1. Add Route
-        2. Add TS
-        3. Add HTML
-        4. Add CSS
-9. Cart Page
-    1. Create CartItem Model
-    2. Create Cart Model
-    3. Generate Cart service
-    4. Add to Cart Button in Food Page
-    5. Generate Cart page component
-        1. Add Route
-        2. Add TS
-        3. Add HTML
-        4. Add CSS
-10. Not Found!
-    1. Generate Component
-        1. Add TS
-        2. Add HTML
-        3. Add CSS
-    2. Add to pages
-        1. Home page
-        2. Food page
-        3. Cart page
-11. Connect to Backend
-    1. Create backend folder
-    2. npm init
-    3. npm install typescript
-    4. Create tsconfig.json
-    5. Create .gitignore
-    6. Copy data.ts to backend/src
-    7. npm install express cors
-    8. Create server.ts
-        1. install @types
-        2. Add APIs
-    9. npm install nodemon ts-node --save-dev
-    10. Add URLs.ts to frontend
-    11. Add HTTPCLIENT module
-    12. Update food service
-12. Login Page
-    1. Generate component
-        1. Add to routes
-        2. Add TS
-        3. Add HTML
-            1. Import Reactive Forms Module
-        4. Add CSS
-    2. Add Login API
-        1. Use JSON
-        2. Add jsonwebtoken
-        3. Test using Postman
-    3. Generate User Service
-        1. Generate User model
-        2. Add User Subject
-        3. Add Login Method
-            1. Add User URLs
-            2. Generate IUserLogin interface
-            3. Add ngx-toastr (had to install with --force)
-                1. Import Module
-                2. Import BrowserAnimationsModule
-                3. Add styles in angular.json
-            4. Add to Header
-        4. Add Local Storage methods
-        5. Add Logout method
-            1. Add to Header
-13. Make components for Login Page
-    1. Input container
-    2. Input validation
-    3. Text Input
-    4. Default button
-14. Connect Login API to MongoDB Atlas
-    1. Moving APIs into routers
-    2. Create MongoDB Atlas
-    3. Create .env file
-    4. Install
-        1. mongoose
-        2. dotenv
-        3. bcryptjs
-        4. express-async-handler
-    5. Connect to MongoDB Atlas
-    6. Use MongoDB instead of data.ts in APIs
-15. Register User
-    1. Add Register API
-    2. Add Register service method
-    3. Add Register link
-    4. Add Register Component
-16. Loading!
-    1. Add Image
-    2. Add Component
-    3. Add Service
-    4. Add Interceptor
-17. Checkout Page
-    1. Create Order Model
-    2. Create Checkout page component
-        1. Add to Router
-    3. Add User to User Service
-    4. Add Cart to Cart Service
-    5. Create Order Items List Component
-    6. Adding Map to the Checkout Page
-        1. Add Leaflet npm package (had to use --force)
-            1. Add @types/leaflet (had to use --force)
-            2. Add CSS to angular.json
-        2. Add AddressLatLng to Order Model
-        3. Create Map component
-            1. Add to checkout page
-            2. Add TS
-                1. Change app-map selector to map
-            3. Add HTML
-            4. Add CSS
-        4. Add Auth Guard
-    7. Save Order
-        1. Add Order Model
-        2. Add Order Status Enum
-        3. Add Auth Middleware
-        4. Add Order Router
-            1. Add create API
-        5. Add Order URLs to urls.ts
-        6. Add Order Service
-            1. Add create Method
-        7. Add Auth Interceptor
-18. Payment Page
-    1. Generate component
-    2. Add 'getOrderForCurrentUser' API
-    3. Add Order Service method
-    4. Connect component to Service
-    5. Make the map component readonly
-19. Adding Paypal
-    1. Generate component
-        1. Add to payment page
-    2. Get Paypal client ID
-    3. Add Paypal JS to index.html
-    4. Set up Paypal button
-    5. Add Pay API to order router
-    6. Get Paypal sandbox account
-20. Order Track page
-    1. Generate component
-        1. Add to routes
-    2. Add API
-        1. Add to urls.ts
-    3. Add method to order.service
-    4. Add HTML
-    5. Add CSS
+<!---Esses são exemplos. Veja https://shields.io para outras pessoas ou para personalizar este conjunto de escudos. Você pode querer incluir dependências, status do projeto e informações de licença aqui--->
+
+<!-- ![GitHub repo size](https://img.shields.io/github/repo-size/iuricode/README-template?style=for-the-badge)
+![GitHub language count](https://img.shields.io/github/languages/count/iuricode/README-template?style=for-the-badge)
+![GitHub forks](https://img.shields.io/github/forks/iuricode/README-template?style=for-the-badge)
+![Bitbucket open issues](https://img.shields.io/bitbucket/issues/iuricode/README-template?style=for-the-badge)
+![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/iuricode/README-template?style=for-the-badge) -->
+
+https://user-images.githubusercontent.com/103137627/210684089-8069673e-19d9-4c11-ae8e-704ecb417f0d.mp4
+
+> Curto vídeo mostrando as principais funcionalidades do site desenvolvidas até o momento.
+
+## ⚙ Tecnologias e funcionalidades
+
+Estes são os principais frameworks e bibliotecas utilizados no projeto:
+
+-   [![TypeScript][typescript]][typescript-url]
+-   [![Angular][angular.io]][angular-url]
+-   [![TailwindCSS][tailwindcss]][tailwind-url]
+-   [![Mongo][mongo]][mongo-url]
+-   [![NodeJs][nodejs]][nodejs-url]
+-   [![Express][express]][express-url]
+
+<br>
+
+### Ajustes e melhorias
+
+<details>
+  <summary>
+O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas. 
+  </summary>
+  <br>
+ 
+-   [ ] Visualização da página inicial em formato de lista
+-   [ ] Criação página Perfil
+-   [ ] Criação página Pedidos
+-   [ ] Incluir review ao finalizar pedido
+-   [ ] Atribuir funcionalidade aos favoritos
+-   [ ] Consulta de endereço por CEP
+
+</details>
+
+<br>
+
+## 💻 Pré-requisitos
+
+Antes de começar, verifique se você atendeu aos seguintes requisitos:
+
+<!---Estes são apenas requisitos de exemplo. Adicionar, duplicar ou remover conforme necessário--->
+
+-   Você [instalou a versão mais recente](https://angular.io/cli) do `Angular`
+-   Você [instalou a versão mais recente](https://nodejs.org/en/) do `NodeJs`
+
+<br>
+
+## 🚀 Instalando e iniciando o FaceBurguer
+
+_Windows_
+
+Primeiramente, abra um terminal e faça um clone do app FaceBurguer:
+
+```
+git clone https://github.com/luizcomparin/app_restaurante_curso.git
+```
+
+Abra 2 terminais dentro da pasta clonada (/app-restaurante-curso), um para o frontend e outro para o backend.
+
+#### No terminal do frontend, rode os comandos:
+
+1. Entre na pasta frontend
+
+```
+cd frontend
+```
+
+2. Instale os pacotes NPM
+
+```
+npm install --force
+```
+
+3. Inicie o servidor
+
+```
+ng serve
+```
+
+#### E no terminal do backend:
+
+```
+cd backend
+
+npm install
+
+npm start
+```
+
+Se tudo ocorrer bem, seu app estará instalado e já rodando em `localhost:4200/`.
+Obs: o backend está em `localhost:5000/`.
+
+<br>
+
+## ☕ Usando o FaceBurguer
+
+Para efetuar o pagamento do pedido, disponibilizo aqui uma conta sandbox do paypal.
+Esta conta poderá ser usada para efetuar o pagamento fictício do pedido.
+
+```
+Usuário:
+sb-epr6q23993823@personal.example.com
+```
+
+```
+Senha:
+pO4)Euhi
+```
+
+<br>
+
+## 🌎 Contato
+
+### **👋 Prazer, meu nome é Luiz Carlos Comparin.**
+
+Estudo desenvolvimento fullstack há mais ou menos um ano. Atualmente me encontro indo a fundo no framework Angular, mas como todo programador iniciante, já trilhei algumas linguagens e frameworks, como Python, Delphi, MySQL, JavaScript, React... das quais tenho um conhecimento fundamental.
+
+Se gostou do que viu, entre em contato comigo para que possamos trabalhar juntos!
+
+-   [![linkedin][linkedin]][linkedin-url]
+-   [![gmail][gmail]][gmail-url]
+
+[⬆ Voltar ao topo](#faceburguer)<br>
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
+[typescript]: https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white
+[typescript-url]: https://www.typescriptlang.org/
+[angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
+[angular-url]: https://angular.io/
+[tailwindcss]: https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white
+[tailwind-url]: https://tailwindcss.com/
+[mongo]: https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white
+[mongo-url]: https://www.mongodb.com/
+[nodejs]: https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white
+[nodejs-url]: https://nodejs.org/en/
+[express]: https://img.shields.io/badge/Express.js-404D59?style=for-the-badge
+[express-url]: https://expressjs.com/pt-br/
+[linkedin]: https://img.shields.io/badge/-LuizCarlosComparin-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/luiz-carlos-comparin-887150150/
+[linkedin-url]: https://www.linkedin.com/in/luiz-carlos-comparin-887150150/
+[gmail]: https://img.shields.io/badge/-luizcomparin18@gmail.com-006bed?style=flat-square&logo=Gmail&logoColor=white&link=mailto:luizcomparin18@gmail.com
+[gmail-url]: mailto:luizcomparin18@gmail.com
