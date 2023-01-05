@@ -2,6 +2,9 @@
 
 <!---Esses são exemplos. Veja https://shields.io para outras pessoas ou para personalizar este conjunto de escudos. Você pode querer incluir dependências, status do projeto e informações de licença aqui--->
 
+![NodeJs](https://img.shields.io/badge/NodeJs-v16.17-4a8735.svg?style=for-the-badge)
+![AngularCli](https://img.shields.io/badge/AngularCli-v15.0.3-aa0025.svg?style=for-the-badge)
+
 <!-- ![GitHub repo size](https://img.shields.io/github/repo-size/iuricode/README-template?style=for-the-badge)
 ![GitHub language count](https://img.shields.io/github/languages/count/iuricode/README-template?style=for-the-badge)
 ![GitHub forks](https://img.shields.io/github/forks/iuricode/README-template?style=for-the-badge)
@@ -22,8 +25,6 @@ Estes são os principais frameworks e bibliotecas utilizados no projeto:
 -   [![Mongo][mongo]][mongo-url]
 -   [![NodeJs][nodejs]][nodejs-url]
 -   [![Express][express]][express-url]
-
-<br>
 
 ### Ajustes e melhorias
 
@@ -102,10 +103,10 @@ Obs: o backend está em `localhost:5000/`.
 
 <br>
 
-## ☕ Usando o FaceBurguer
+## 💲 Pagando pelo Paypal
 
-Para efetuar o pagamento do pedido, disponibilizo aqui uma conta sandbox do paypal.
-Esta conta poderá ser usada para efetuar o pagamento fictício do pedido.
+Para efetuar o pagamento fictício do pedido, disponibilizo aqui uma conta sandbox do paypal.
+Esta conta poderá ser usada para efetuar o pagamento.
 
 ```
 Usuário:
