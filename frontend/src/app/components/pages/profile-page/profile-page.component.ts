@@ -2,29 +2,28 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-import { IUserRegister } from 'src/app/shared/interfaces/IUserRegister';
+import { IUserUpdate } from 'src/app/shared/interfaces/IUserUpdate';
 import { PasswordsMatchValidator } from 'src/app/shared/validators/password_match_valitador';
 
 @Component({
-	selector: 'app-register-page',
-	templateUrl: './register-page.component.html',
-	styleUrls: ['./register-page.component.scss'],
+	selector: 'app-profile-page',
+	templateUrl: './profile-page.component.html',
+	styleUrls: ['./profile-page.component.scss'],
 })
-export class RegisterPageComponent implements OnInit {
-	registerForm!: FormGroup;
-	isSubmitted = false;
-
-	returnUrl = '';
-
+export class ProfilePageComponent implements OnInit {
 	constructor(
-		private formBuilder: FormBuilder,
 		private userService: UserService,
+		private formBuilder: FormBuilder,
 		private activatedRoute: ActivatedRoute,
 		private router: Router
 	) {}
 
+	updateForm!: FormGroup;
+	isSubmitted = false;
+	returnUrl = '';
+
 	ngOnInit(): void {
-		this.registerForm = this.formBuilder.group(
+		this.updateForm = this.formBuilder.group(
 			{
 				name: ['', [Validators.required, Validators.minLength(5)]],
 				email: ['', [Validators.required, Validators.email]],
@@ -49,19 +48,20 @@ export class RegisterPageComponent implements OnInit {
 	}
 
 	get fc() {
-		return this.registerForm.controls;
+		return this.updateForm.controls;
 	}
 
 	submit() {
 		this.isSubmitted = true;
-		if (this.registerForm.invalid) return;
+		if (this.updateForm.invalid) {
+			console.log('Form inválido. Campos faltando ou valores inválidos.');
+			return;
+		}
 
-		const fv = this.registerForm.value;
-		const user: IUserRegister = {
+		const fv = this.updateForm.value;
+		const user: IUserUpdate = {
 			name: fv.name,
 			email: fv.email,
-			password: fv.password,
-			confirmPassword: fv.confirmPassword,
 			address: {
 				cep: fv.cep,
 				state: fv.state,
@@ -72,8 +72,13 @@ export class RegisterPageComponent implements OnInit {
 			},
 		};
 
-		this.userService.register(user).subscribe((_) => {
-			this.router.navigateByUrl(this.returnUrl);
+		this.userService.update(user).subscribe((_) => {
+			this.router.parseUrl(this.returnUrl);
 		});
+
+		// Reload necessário para pegar o token no Header
+		// window.location.reload();
 	}
+
+	// comitar():any => {this.userService.update()}
 }

@@ -2,7 +2,7 @@
 	<!--container-->
 	<div class="w-[25rem]">
 		<!--details-->
-		<app-title title="Register"></app-title>
+		<app-title title="Cadastro"></app-title>
 		<form [formGroup]="registerForm" (ngSubmit)="submit()">
 			<text-input
 				[control]="fc.name"
@@ -32,9 +32,39 @@
 			</text-input>
 
 			<text-input
-				[control]="fc.address"
+				[control]="fc.cep"
 				[showErrorsWhen]="isSubmitted"
-				label="Endereço">
+				label="CEP">
+			</text-input>
+
+			<text-input
+				[control]="fc.state"
+				[showErrorsWhen]="isSubmitted"
+				label="Estado">
+			</text-input>
+
+			<text-input
+				[control]="fc.city"
+				[showErrorsWhen]="isSubmitted"
+				label="Cidade">
+			</text-input>
+
+			<text-input
+				[control]="fc.district"
+				[showErrorsWhen]="isSubmitted"
+				label="Bairro">
+			</text-input>
+
+			<text-input
+				[control]="fc.street"
+				[showErrorsWhen]="isSubmitted"
+				label="Rua">
+			</text-input>
+
+			<text-input
+				[control]="fc.residenceNumber"
+				[showErrorsWhen]="isSubmitted"
+				label="Numero">
 			</text-input>
 
 			<default-button text="Criar conta"></default-button>

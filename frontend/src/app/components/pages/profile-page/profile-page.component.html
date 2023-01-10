@@ -1,0 +1,75 @@
+<div class="flex justify-center items-center ">
+	<div class="flex ">
+		<details open class=" border-primary border ">
+			<!--Informacoes pessoais e de contato-->
+			<summary class="p-4 text-center list-none cursor-pointer">Informações pessoais e de contato</summary>
+
+			<form [formGroup]="updateForm" (ngSubmit)="submit()" class="w-[25rem]">
+				<text-input
+					[control]="fc.name"
+					[showErrorsWhen]="isSubmitted"
+					label="Nome">
+				</text-input>
+
+				<text-input
+					[control]="fc.email"
+					[showErrorsWhen]="isSubmitted"
+					label="Email"
+					type="email">
+				</text-input>
+
+				<text-input
+					[control]="fc.password"
+					[showErrorsWhen]="isSubmitted"
+					label="Senha"
+					type="password">
+				</text-input>
+
+				<text-input
+					[control]="fc.confirmPassword"
+					[showErrorsWhen]="isSubmitted"
+					label="Confirmar Senha"
+					type="password">
+				</text-input>
+
+				<text-input
+					[control]="fc.cep"
+					[showErrorsWhen]="isSubmitted"
+					label="CEP">
+				</text-input>
+
+				<text-input
+					[control]="fc.state"
+					[showErrorsWhen]="isSubmitted"
+					label="Estado">
+				</text-input>
+
+				<text-input
+					[control]="fc.city"
+					[showErrorsWhen]="isSubmitted"
+					label="Cidade">
+				</text-input>
+
+				<text-input
+					[control]="fc.district"
+					[showErrorsWhen]="isSubmitted"
+					label="Bairro">
+				</text-input>
+
+				<text-input
+					[control]="fc.street"
+					[showErrorsWhen]="isSubmitted"
+					label="Rua">
+				</text-input>
+
+				<text-input
+					[control]="fc.residenceNumber"
+					[showErrorsWhen]="isSubmitted"
+					label="Numero">
+				</text-input>
+
+				<default-button></default-button>
+			</form>
+		</details>
+	</div>
+</div>

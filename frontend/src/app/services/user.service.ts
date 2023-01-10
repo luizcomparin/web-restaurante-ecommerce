@@ -2,9 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { USER_LOGIN_URL, USER_REGISTER_URL } from '../shared/constants/urls';
+import {
+	USER_LOGIN_URL,
+	USER_REGISTER_URL,
+	USER_UPDATE_URL,
+} from '../shared/constants/urls';
 import { IUserLogin } from '../shared/interfaces/IUserLogin';
 import { IUserRegister } from '../shared/interfaces/IUserRegister';
+import { IUserUpdate } from '../shared/interfaces/IUserUpdate';
 import { User } from '../shared/models/User';
 
 const USER_KEY = 'User';
@@ -50,6 +55,15 @@ export class UserService {
 		);
 	}
 
+	logout() {
+		this.userSubject.next(new User());
+		localStorage.removeItem(USER_KEY);
+		// console.log('URL atual: ' + window.location.href);
+		if (window.location.href != 'http://localhost:4200/cart-page') {
+			window.location.href = 'http://localhost:4200/';
+		} else window.location.reload();
+	}
+
 	register(userRegister: IUserRegister): Observable<User> {
 		return this.http.post<User>(USER_REGISTER_URL, userRegister).pipe(
 			tap({
@@ -71,10 +85,25 @@ export class UserService {
 		);
 	}
 
-	logout() {
-		this.userSubject.next(new User());
-		localStorage.removeItem(USER_KEY);
-		window.location.reload();
+	update(userUpdate: IUserUpdate): Observable<User> {
+		return this.http.post<User>(USER_UPDATE_URL, userUpdate).pipe(
+			tap({
+				next: (user) => {
+					this.setUserToLocalStorage(user);
+					this.userSubject.next(user);
+					this.toastrService.success(
+						`Suas informações foram atualizadas!`,
+						'Dados salvos com sucesso.'
+					);
+				},
+				error: (errorResponse) => {
+					this.toastrService.error(
+						errorResponse.error,
+						'Falha na atualização.'
+					);
+				},
+			})
+		);
 	}
 
 	private setUserToLocalStorage(user: User) {

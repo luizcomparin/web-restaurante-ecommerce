@@ -32,6 +32,7 @@ import { PaypalButtonComponent } from './components/partials/paypal-button/paypa
 import { OrderTrackPageComponent } from './components/pages/order-track-page/order-track-page.component';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
+import { ProfilePageComponent } from './components/pages/profile-page/profile-page.component';
 
 registerLocaleData(localePt, 'pt');
 
@@ -59,6 +60,7 @@ registerLocaleData(localePt, 'pt');
 		PaymentPageComponent,
 		PaypalButtonComponent,
 		OrderTrackPageComponent,
+		ProfilePageComponent,
 	],
 	imports: [
 		BrowserModule,
@@ -68,7 +70,7 @@ registerLocaleData(localePt, 'pt');
 		HttpClientModule,
 		ReactiveFormsModule,
 		ToastrModule.forRoot({
-			timeOut: 3000,
+			timeOut: 5000,
 			positionClass: 'toast-bottom-right',
 			newestOnTop: false,
 		}),

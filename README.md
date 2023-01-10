@@ -19,8 +19,8 @@ https://user-images.githubusercontent.com/103137627/210684089-8069673e-19d9-4c11
 
 Estes são os principais frameworks e bibliotecas utilizados no projeto:
 
--   [![TypeScript][typescript]][typescript-url]
 -   [![Angular][angular.io]][angular-url]
+-   [![TypeScript][typescript]][typescript-url]
 -   [![TailwindCSS][tailwindcss]][tailwind-url]
 -   [![Mongo][mongo]][mongo-url]
 -   [![NodeJs][nodejs]][nodejs-url]
@@ -53,6 +53,8 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
 -   Você [instalou a versão mais recente](https://angular.io/cli) do `Angular`
 -   Você [instalou a versão mais recente](https://nodejs.org/en/) do `NodeJs`
+
+_O projeto usa o [MongoDB Atlas](https://www.mongodb.com/atlas/database), uma versão em nuvem do MongoDB que não necessita de instalação._
 
 <br>
 
@@ -136,10 +138,10 @@ Se gostou do que viu, entre em contato comigo para que possamos trabalhar juntos
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[typescript]: https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white
-[typescript-url]: https://www.typescriptlang.org/
 [angular.io]: https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white
 [angular-url]: https://angular.io/
+[typescript]: https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white
+[typescript-url]: https://www.typescriptlang.org/
 [tailwindcss]: https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white
 [tailwind-url]: https://tailwindcss.com/
 [mongo]: https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white
@@ -152,3 +154,6 @@ Se gostou do que viu, entre em contato comigo para que possamos trabalhar juntos
 [linkedin-url]: https://www.linkedin.com/in/luiz-carlos-comparin-887150150/
 [gmail]: https://img.shields.io/badge/-luizcomparin18@gmail.com-006bed?style=flat-square&logo=Gmail&logoColor=white&link=mailto:luizcomparin18@gmail.com
 [gmail-url]: mailto:luizcomparin18@gmail.com
+
+<!-- [wpp]: https://img.shields.io/badge/-(47)992831801-25D366?style=flat-square&logo=Whatsapp&logoColor=white
+[wpp-url]: https://api.whatsapp.com/send?phone=47992831801 -->

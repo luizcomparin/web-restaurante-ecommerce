@@ -9,6 +9,7 @@ import { CheckoutPageComponent } from './components/pages/checkout-page/checkout
 import { AuthGuard } from './auth/guards/auth.guard';
 import { PaymentPageComponent } from './components/pages/payment-page/payment-page.component';
 import { OrderTrackPageComponent } from './components/pages/order-track-page/order-track-page.component';
+import { ProfilePageComponent } from './components/pages/profile-page/profile-page.component';
 
 const routes: Routes = [
 	{ path: '', component: HomeComponent },
@@ -18,6 +19,7 @@ const routes: Routes = [
 	{ path: 'cart-page', component: CartPageComponent },
 	{ path: 'login', component: LoginPageComponent },
 	{ path: 'register', component: RegisterPageComponent },
+	{ path: 'profile', component: ProfilePageComponent },
 	{
 		path: 'checkout',
 		component: CheckoutPageComponent,

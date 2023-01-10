@@ -1,8 +1,7 @@
-export class User {
-	id!: string;
-	email!: string;
-	name!: string;
-	address!: {
+export interface IUserUpdate {
+	name: string;
+	email: string;
+	address: {
 		cep: string;
 		state: string;
 		city: string;
@@ -10,6 +9,4 @@ export class User {
 		street: string;
 		residenceNumber: number;
 	};
-	token!: string;
-	isAdmin!: boolean;
 }

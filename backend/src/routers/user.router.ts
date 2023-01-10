@@ -39,6 +39,43 @@ router.post(
 );
 
 router.post(
+	"/update",
+	asyncHandler(async (req, res) => {
+		const { name, email, address } = req.body;
+		// Destructuring assignment
+		const user = await UserModel.findOne({ email });
+		// const current_user = localStorage.getItem(email);
+		// UserModel.updateOne(email:email,)
+		if (user) {
+			user.name = name;
+			user.address.cep = address.cep;
+			user.address.state = address.state;
+			user.address.city = address.city;
+			user.address.district = address.district;
+			user.address.street = address.street;
+			user.address.residenceNumber = address.residenceNumber;
+			await user.save();
+			res.send(
+				generateTokenReponse(user)
+				// [{
+				// 	"db.address": user,
+				// },
+				// { "req.address": req.body }]
+			);
+			// Só falta agora salvar o req.body no User
+
+			// console.log("LS user: ", current_user);
+			// console.log("req.body: ", req.body);
+			// console.log("req.params: ", req.params);
+			return;
+		} else {
+			res.send({ message: "nao tem email assim no banco" });
+			return;
+		}
+	})
+);
+
+router.post(
 	"/register",
 	asyncHandler(async (req, res) => {
 		const { name, email, password, address } = req.body;
