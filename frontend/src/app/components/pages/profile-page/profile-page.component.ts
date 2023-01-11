@@ -22,19 +22,36 @@ export class ProfilePageComponent implements OnInit {
 	isSubmitted = false;
 	returnUrl = '';
 
+	name = this.userService.currentUser.name;
+	email = this.userService.currentUser.email;
+	cellphone = this.userService.currentUser.cellphone;
+	zipCode = this.userService.currentUser.address.zipCode;
+	state = this.userService.currentUser.address.state;
+	city = this.userService.currentUser.address.city;
+	district = this.userService.currentUser.address.district;
+	street = this.userService.currentUser.address.street;
+	residenceNumber = this.userService.currentUser.address.residenceNumber;
+
 	ngOnInit(): void {
 		this.updateForm = this.formBuilder.group(
 			{
-				name: ['', [Validators.required, Validators.minLength(5)]],
-				email: ['', [Validators.required, Validators.email]],
+				name: [
+					this.name,
+					[Validators.required, Validators.minLength(5)],
+				],
+				email: [this.email, [Validators.required, Validators.email]],
+				cellphone: [this.cellphone, [Validators.required]],
 				password: ['', [Validators.required, Validators.minLength(5)]],
 				confirmPassword: ['', Validators.required],
-				cep: ['', [Validators.required, Validators.minLength(8)]],
-				state: ['', Validators.required],
-				city: ['', Validators.required],
-				district: ['', Validators.required],
-				street: ['', Validators.required],
-				residenceNumber: ['', Validators.required],
+				zipCode: [
+					this.zipCode,
+					[Validators.required, Validators.minLength(8)],
+				],
+				state: [this.state, Validators.required],
+				city: [this.city, Validators.required],
+				district: [this.district, Validators.required],
+				street: [this.street, Validators.required],
+				residenceNumber: [this.residenceNumber, Validators.required],
 			},
 			{
 				validators: PasswordsMatchValidator(
@@ -62,8 +79,9 @@ export class ProfilePageComponent implements OnInit {
 		const user: IUserUpdate = {
 			name: fv.name,
 			email: fv.email,
+			cellphone: fv.cellphone,
 			address: {
-				cep: fv.cep,
+				zipCode: fv.zipCode,
 				state: fv.state,
 				city: fv.city,
 				district: fv.district,

@@ -3,8 +3,9 @@ export interface IUserRegister {
 	email: string;
 	password: string;
 	confirmPassword: string;
+	cellphone: number;
 	address: {
-		cep: string;
+		zipCode: string;
 		state: string;
 		city: string;
 		district: string;

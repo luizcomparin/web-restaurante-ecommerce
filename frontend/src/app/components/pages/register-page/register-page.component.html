@@ -1,4 +1,4 @@
-<div class="flex justify-center items-center h-full mt-12">
+<div class="flex justify-center items-center h-full my-4">
 	<!--container-->
 	<div class="w-[25rem]">
 		<!--details-->
@@ -32,7 +32,13 @@
 			</text-input>
 
 			<text-input
-				[control]="fc.cep"
+				[control]="fc.cellphone"
+				[showErrorsWhen]="isSubmitted"
+				label="Celular">
+			</text-input>
+
+			<text-input
+				[control]="fc.zipCode"
 				[showErrorsWhen]="isSubmitted"
 				label="CEP">
 			</text-input>

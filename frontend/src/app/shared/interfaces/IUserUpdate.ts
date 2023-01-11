@@ -1,8 +1,9 @@
 export interface IUserUpdate {
 	name: string;
 	email: string;
+	cellphone: number;
 	address: {
-		cep: string;
+		zipCode: string;
 		state: string;
 		city: string;
 		district: string;

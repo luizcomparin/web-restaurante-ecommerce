@@ -30,16 +30,26 @@ Estes são os principais frameworks e bibliotecas utilizados no projeto:
 
 <details>
   <summary>
-O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas nas seguintes tarefas. 
+O projeto ainda está em desenvolvimento. Aqui está uma lista das features já existentes e as que ainda serão implementadas.
   </summary>
   <br>
- 
--   [ ] Visualização da página inicial em formato de lista
--   [ ] Criação página Perfil
--   [ ] Criação página Pedidos
+
+-   [x] CRUD completo com MongoDB (manipulação de dados do usuário)
+-   [x] Chamadas de API
+-   [x] Login com autenticação JsonWebToken
+-   [x] Pagamento do pedido através da API do Paypal
+-   [x] Sistema de geo-localização pela lib 'leaflet'
+
+**Na fila de desenvolvimento:**
+
+-   [ ] Landing page
+-   [ ] Criação página de Pedidos do usuário
 -   [ ] Incluir review ao finalizar pedido
 -   [ ] Atribuir funcionalidade aos favoritos
 -   [ ] Consulta de endereço por CEP
+-   [ ] Visualização da página inicial em formato de lista detalhada
+-   [ ] Validar email ao criar conta
+-   [ ] Gerar nota fiscal eletrônica
 
 </details>
 
@@ -51,8 +61,8 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
 <!---Estes são apenas requisitos de exemplo. Adicionar, duplicar ou remover conforme necessário--->
 
--   Você [instalou a versão mais recente](https://angular.io/cli) do `Angular`
--   Você [instalou a versão mais recente](https://nodejs.org/en/) do `NodeJs`
+-   [Instalou a versão mais recente](https://angular.io/cli) do `Angular`
+-   [Instalou a versão mais recente](https://nodejs.org/en/) do `NodeJs`
 
 _O projeto usa o [MongoDB Atlas](https://www.mongodb.com/atlas/database), uma versão em nuvem do MongoDB que não necessita de instalação._
 
@@ -126,9 +136,9 @@ pO4)Euhi
 
 ### **👋 Prazer, meu nome é Luiz Carlos Comparin.**
 
-Estudo desenvolvimento fullstack há mais ou menos um ano. Atualmente me encontro indo a fundo no framework Angular, mas como todo programador iniciante, já trilhei algumas linguagens e frameworks, como Python, Delphi, MySQL, JavaScript, React... das quais tenho um conhecimento fundamental.
+Estudo desenvolvimento fullstack há mais ou menos um ano. Atualmente me encontro indo a fundo no framework Angular, mas como todo programador iniciante, já trilhei algumas linguagens e frameworks, como Python, React, JavaScript, MySQL e Delphi, das quais tenho um conhecimento fundamental.
 
-Se gostou do que viu, entre em contato comigo para que possamos trabalhar juntos!
+Se gostou do que viu, entre em contato comigo para que possamos trabalhar juntos:
 
 -   [![linkedin][linkedin]][linkedin-url]
 -   [![gmail][gmail]][gmail-url]

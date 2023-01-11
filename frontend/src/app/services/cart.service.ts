@@ -14,7 +14,11 @@ export class CartService {
 
 	addToCart(food: Food): void {
 		let cartItem = this.cart.items.find((item) => item.food.id === food.id);
-		if (cartItem) return;
+		if (cartItem) {
+			cartItem.quantity++;
+			this.setCartToLocalStorage();
+			return;
+		}
 
 		this.cart.items.push(new CartItem(food));
 		this.setCartToLocalStorage();

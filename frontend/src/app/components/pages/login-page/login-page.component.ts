@@ -18,7 +18,9 @@ export class LoginPageComponent implements OnInit {
 		private userService: UserService,
 		private activatedRoute: ActivatedRoute,
 		private router: Router
-	) {}
+	) {
+		if (userService.currentUser.token) router.navigate(['/']);
+	}
 
 	ngOnInit(): void {
 		this.loginForm = this.formBuilder.group({

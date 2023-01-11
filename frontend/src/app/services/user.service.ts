@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import {
@@ -25,7 +26,8 @@ export class UserService {
 
 	constructor(
 		private http: HttpClient,
-		private toastrService: ToastrService
+		private toastrService: ToastrService,
+		private router: Router
 	) {
 		this.userObservable = this.userSubject.asObservable();
 	}
@@ -115,4 +117,21 @@ export class UserService {
 		if (userJson) return JSON.parse(userJson) as User;
 		return new User();
 	}
+
+	// FUNCAO SUBSTITUIDA PELO CODIGO:
+	// if (userService.currentUser.token) router.navigate(['/']);
+	// Verifica se o usuário está logado ou não, e conforme desejo,
+	// redireciona para a rota informada.
+	// redirectIfUserIs(status: 'logged' | 'notLogged', route: string) {
+	// 	this.userObservable.subscribe((user) => {
+	// 		let loginStatus;
+
+	// 		if (status == 'logged') loginStatus = user.token;
+	// 		else loginStatus = !user.token;
+
+	// 		if (loginStatus) {
+	// 			this.router.navigate([route]);
+	// 		}
+	// 	});
+	// }
 }

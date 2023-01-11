@@ -9,19 +9,19 @@ import bcrypt from "bcryptjs";
 const router = Router();
 
 // Envia dados da tabela de usuarios ao MongoDB
-router.get(
-	"/seed",
-	asyncHandler(async (req, res) => {
-		const usersCount = await UserModel.countDocuments();
-		if (usersCount > 0) {
-			res.send("A Seed já foi feita.");
-			return;
-		}
+// router.get(
+// 	"/seed",
+// 	asyncHandler(async (req, res) => {
+// 		const usersCount = await UserModel.countDocuments();
+// 		if (usersCount > 0) {
+// 			res.send("A Seed já foi feita.");
+// 			return;
+// 		}
 
-		await UserModel.create(sample_users);
-		res.send("A Seed está pronta.");
-	})
-);
+// 		await UserModel.create(sample_users);
+// 		res.send("A Seed está pronta.");
+// 	})
+// );
 
 router.post(
 	"/login",
@@ -48,7 +48,7 @@ router.post(
 		// UserModel.updateOne(email:email,)
 		if (user) {
 			user.name = name;
-			user.address.cep = address.cep;
+			user.address.zipCode = address.zipCode;
 			user.address.state = address.state;
 			user.address.city = address.city;
 			user.address.district = address.district;
@@ -78,7 +78,7 @@ router.post(
 router.post(
 	"/register",
 	asyncHandler(async (req, res) => {
-		const { name, email, password, address } = req.body;
+		const { name, email, password, cellphone, address } = req.body;
 		// Destructuring assignment
 		const user = await UserModel.findOne({ email });
 		if (user) {
@@ -93,6 +93,7 @@ router.post(
 			name,
 			email: email.toLowerCase(),
 			password: encryptedPassword,
+			cellphone,
 			address,
 			isAdmin: false,
 		};
@@ -117,8 +118,9 @@ const generateTokenReponse = (user: User) => {
 
 	return {
 		id: user.id,
-		email: user.email,
 		name: user.name,
+		email: user.email,
+		cellphone: user.cellphone,
 		address: user.address,
 		isAdmin: user.isAdmin,
 		token: token,
