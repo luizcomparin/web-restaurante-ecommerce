@@ -16,8 +16,6 @@ import { LoginPageComponent } from './components/pages/login-page/login-page.com
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { InputContainerComponent } from './components/partials/input-container/input-container.component';
-import { InputValidationComponent } from './components/partials/input-validation/input-validation.component';
 import { TextInputComponent } from './components/partials/text-input/text-input.component';
 import { DefaultButtonComponent } from './components/partials/default-button/default-button.component';
 import { RegisterPageComponent } from './components/pages/register-page/register-page.component';
@@ -48,8 +46,6 @@ registerLocaleData(localePt, 'pt');
 		TitleComponent,
 		NotFoundComponent,
 		LoginPageComponent,
-		InputContainerComponent,
-		InputValidationComponent,
 		TextInputComponent,
 		DefaultButtonComponent,
 		RegisterPageComponent,

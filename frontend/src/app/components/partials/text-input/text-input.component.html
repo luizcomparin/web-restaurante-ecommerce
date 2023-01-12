@@ -1,6 +1,19 @@
-<input-container [label]="label">
-	<input [type]="type" [placeholder]="label" [formControl]="formControl" />
-	<input-validation [control]="control" [showErrorsWhen]="showErrorsWhen"></input-validation>
-</input-container>
+<div class=" flex flex-col mb-2 pt-[0.3rem] ">
+	<!--container-->
+	<div class="flex relative h-[2.7rem] items-center px-2 border-[1px]  rounded-xl" [ngClass]="showError ? 'border-primary' : 'border-[#e0e0e0]' ">
+		<!--content-->
+		<input [id]="idInput" [type]="type" [formControl]="formControl" placeholder=" " autocomplete="off" />
+		<label [for]="idInput"> {{ label }} </label>
+	</div>
+
+	<div class="text-primary text-center h-[1rem] text-sm" [ngClass]="showError ? 'flex' : 'invisible' ">
+		<!--input-validation-->
+		<div *ngFor="let errorMessage of errorMessages">
+			<!--error-list-->
+			{{ errorMessage }}
+		</div>
+	</div>
+</div>
+
 
 <!--The styling of this component is in it's .scss file-->
