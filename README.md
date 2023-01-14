@@ -13,7 +13,7 @@
 
 https://user-images.githubusercontent.com/103137627/210684089-8069673e-19d9-4c11-ae8e-704ecb417f0d.mp4
 
-> Curto vídeo mostrando as principais funcionalidades do site desenvolvidas até o momento.
+> Curto vídeo mostrando as principais funcionalidades do site desenvolvidas até o momento (04/01/2023). _A versão atual do repositório estará diferente (mais atualizada) do que o exibido no vídeo._
 
 ## ⚙ Tecnologias e funcionalidades
 

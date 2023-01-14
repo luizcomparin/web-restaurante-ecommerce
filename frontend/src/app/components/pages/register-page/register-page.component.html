@@ -12,6 +12,13 @@
 			</text-input>
 
 			<text-input
+				[control]="fc.cpf"
+				[showErrorsWhen]="isSubmitted"
+				label="CPF"
+				idInput="cpf">
+			</text-input>
+
+			<text-input
 				[control]="fc.email"
 				[showErrorsWhen]="isSubmitted"
 				label="Email"
@@ -24,7 +31,8 @@
 				[showErrorsWhen]="isSubmitted"
 				label="Senha"
 				type="password"
-				idInput="senha">
+				idInput="senha"
+				[hideableValue]="true">
 			</text-input>
 
 			<text-input
@@ -32,7 +40,8 @@
 				[showErrorsWhen]="isSubmitted"
 				label="Confirmar Senha"
 				type="password"
-				idInput="confirmar">
+				idInput="confirmar"
+				[hideableValue]="true">
 			</text-input>
 
 			<text-input

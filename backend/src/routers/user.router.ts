@@ -41,13 +41,15 @@ router.post(
 router.post(
 	"/update",
 	asyncHandler(async (req, res) => {
-		const { name, email, address } = req.body;
+		const { name, cpf, cellphone, email, address } = req.body;
 		// Destructuring assignment
 		const user = await UserModel.findOne({ email });
 		// const current_user = localStorage.getItem(email);
 		// UserModel.updateOne(email:email,)
 		if (user) {
 			user.name = name;
+			user.cpf = cpf;
+			user.cellphone = cellphone;
 			user.address.zipCode = address.zipCode;
 			user.address.state = address.state;
 			user.address.city = address.city;
@@ -78,7 +80,7 @@ router.post(
 router.post(
 	"/register",
 	asyncHandler(async (req, res) => {
-		const { name, email, password, cellphone, address } = req.body;
+		const { name, cpf, cellphone, email, password, address } = req.body;
 		// Destructuring assignment
 		const user = await UserModel.findOne({ email });
 		if (user) {
@@ -91,9 +93,10 @@ router.post(
 		const newUser: User = {
 			id: "",
 			name,
+			cpf,
+			cellphone,
 			email: email.toLowerCase(),
 			password: encryptedPassword,
-			cellphone,
 			address,
 			isAdmin: false,
 		};
@@ -119,8 +122,9 @@ const generateTokenReponse = (user: User) => {
 	return {
 		id: user.id,
 		name: user.name,
-		email: user.email,
+		cpf: user.cpf,
 		cellphone: user.cellphone,
+		email: user.email,
 		address: user.address,
 		isAdmin: user.isAdmin,
 		token: token,

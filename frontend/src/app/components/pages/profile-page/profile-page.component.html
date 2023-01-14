@@ -1,75 +1,112 @@
-<div class="flex justify-center items-center ">
-	<div class="flex ">
-		<details open class=" border-primary border ">
-			<!--Informacoes pessoais e de contato-->
-			<summary class="p-4 text-center list-none cursor-pointer">Informações pessoais e de contato</summary>
+<div class="flex justify-center items-center   ">
+	<div class="flex flex-col gap-4  ">
+		<app-title title="Meus dados" class="mt-4"></app-title>
+		<form [formGroup]="updateForm" (ngSubmit)="submit()" class="">
 
-			<form [formGroup]="updateForm" (ngSubmit)="submit()" class="w-[25rem]">
+			<section class="grid grid-cols-3 gap-4 p-4 border-b">
+				<!--Informacoes pessoais e de contato-->
+				<span class="col-span-3 text-xl p-4 font-bold ">Informações pessoais e de contato</span>
 				<text-input
 					[control]="fc.name"
 					[showErrorsWhen]="isSubmitted"
-					label="Nome">
+					label="Nome"
+					idInput="nome">
 				</text-input>
 
+				<text-input
+					[control]="fc.cpf"
+					[showErrorsWhen]="isSubmitted"
+					label="CPF"
+					idInput="cpf">
+				</text-input>
+
+				<text-input
+					[control]="fc.cellphone"
+					[showErrorsWhen]="isSubmitted"
+					label="Celular"
+					idInput="celular">
+				</text-input>
+			</section>
+
+
+			<section class="grid grid-cols-3 gap-4 p-4 border-b">
+				<!--Endereco de entrega-->
+				<span class="col-span-3 text-xl p-4 font-bold ">Endereço de entrega</span>
+
+				<text-input
+					[control]="fc.zipCode"
+					[showErrorsWhen]="isSubmitted"
+					label="CEP"
+					idInput="cep">
+				</text-input>
+
+				<text-input
+					[control]="fc.state"
+					[showErrorsWhen]="isSubmitted"
+					label="Estado"
+					idInput="estado">
+				</text-input>
+
+				<text-input
+					[control]="fc.city"
+					[showErrorsWhen]="isSubmitted"
+					label="Cidade"
+					idInput="cidade">
+				</text-input>
+
+				<text-input
+					[control]="fc.district"
+					[showErrorsWhen]="isSubmitted"
+					label="Bairro"
+					idInput="bairro">
+				</text-input>
+
+				<text-input
+					[control]="fc.street"
+					[showErrorsWhen]="isSubmitted"
+					label="Rua"
+					idInput="rua">
+				</text-input>
+
+				<text-input
+					[control]="fc.residenceNumber"
+					[showErrorsWhen]="isSubmitted"
+					label="Numero"
+					idInput="numero">
+				</text-input>
+			</section>
+
+			<section class="grid grid-cols-3 gap-4 p-4 border-b">
+				<!--Credenciais-->
+				<span class="col-span-3 text-xl p-4 font-bold ">Credenciais</span>
 				<text-input
 					[control]="fc.email"
 					[showErrorsWhen]="isSubmitted"
 					label="Email"
-					type="email">
+					type="email"
+					idInput="email">
 				</text-input>
 
 				<text-input
 					[control]="fc.password"
 					[showErrorsWhen]="isSubmitted"
 					label="Senha"
-					type="password">
+					type="password"
+					idInput="senha"
+					[hideableValue]="true">
 				</text-input>
 
 				<text-input
 					[control]="fc.confirmPassword"
 					[showErrorsWhen]="isSubmitted"
 					label="Confirmar Senha"
-					type="password">
+					type="password"
+					idInput="confirmar"
+					[hideableValue]="true">
 				</text-input>
+			</section>
 
-				<text-input
-					[control]="fc.zipCode"
-					[showErrorsWhen]="isSubmitted"
-					label="CEP">
-				</text-input>
-
-				<text-input
-					[control]="fc.state"
-					[showErrorsWhen]="isSubmitted"
-					label="Estado">
-				</text-input>
-
-				<text-input
-					[control]="fc.city"
-					[showErrorsWhen]="isSubmitted"
-					label="Cidade">
-				</text-input>
-
-				<text-input
-					[control]="fc.district"
-					[showErrorsWhen]="isSubmitted"
-					label="Bairro">
-				</text-input>
-
-				<text-input
-					[control]="fc.street"
-					[showErrorsWhen]="isSubmitted"
-					label="Rua">
-				</text-input>
-
-				<text-input
-					[control]="fc.residenceNumber"
-					[showErrorsWhen]="isSubmitted"
-					label="Numero">
-				</text-input>
-
-				<default-button></default-button>
-			</form>
-		</details>
+			<default-button text="Salvar"></default-button>
+		</form>
 	</div>
 </div>

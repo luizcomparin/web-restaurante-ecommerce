@@ -2,7 +2,7 @@ import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
 
 const VALIDATORS_MESSAGES: any = {
-	required: 'O campo não pode estar vazio',
+	required: 'Campo obrigatório',
 	email: 'Email inválido',
 	minlength: 'Insira mais caracteres',
 	notMatch: 'A senha está diferente',
@@ -18,10 +18,21 @@ export class TextInputComponent implements OnInit, OnChanges {
 	@Input() showErrorsWhen: boolean = true;
 	@Input() label!: string;
 	@Input() type: 'text' | 'password' | 'email' = 'text';
-	@Input() idInput!: string;
+	@Input() idInput!: string; // Id do objeto para relacionamento do label
+	@Input() hideableValue: boolean = false; // Define se o input vai ter o olhinho pra ocultar o valor
 
+	hidden: boolean = true;
 	showError: boolean = false;
 	errorMessages: string[] = [];
+
+	hideValue() {
+		if (this.hideableValue) {
+			this.hidden = !this.hidden;
+			if (this.type == 'text') return (this.type = 'password');
+			if (this.type == 'password') return (this.type = 'text');
+		}
+		return;
+	}
 
 	get formControl() {
 		return this.control as FormControl;

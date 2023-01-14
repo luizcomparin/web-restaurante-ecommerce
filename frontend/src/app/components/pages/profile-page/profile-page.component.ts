@@ -23,6 +23,7 @@ export class ProfilePageComponent implements OnInit {
 	returnUrl = '';
 
 	name = this.userService.currentUser.name;
+	cpf = this.userService.currentUser.cpf;
 	email = this.userService.currentUser.email;
 	cellphone = this.userService.currentUser.cellphone;
 	zipCode = this.userService.currentUser.address.zipCode;
@@ -39,6 +40,7 @@ export class ProfilePageComponent implements OnInit {
 					this.name,
 					[Validators.required, Validators.minLength(5)],
 				],
+				cpf: [this.cpf, [Validators.required, Validators.minLength(5)]],
 				email: [this.email, [Validators.required, Validators.email]],
 				cellphone: [this.cellphone, [Validators.required]],
 				password: ['', [Validators.required, Validators.minLength(5)]],
@@ -78,6 +80,7 @@ export class ProfilePageComponent implements OnInit {
 		const fv = this.updateForm.value;
 		const user: IUserUpdate = {
 			name: fv.name,
+			cpf: fv.cpf,
 			email: fv.email,
 			cellphone: fv.cellphone,
 			address: {

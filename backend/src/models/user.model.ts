@@ -3,9 +3,10 @@ import { model, Schema } from "mongoose";
 export interface User {
 	id: string;
 	name: string;
+	cpf: string;
+	cellphone: number;
 	email: string;
 	password: string;
-	cellphone: number;
 	address: {
 		zipCode: string;
 		state: string;
@@ -29,9 +30,10 @@ export const AddressSchema = new Schema({
 export const UserSchema = new Schema<User>(
 	{
 		name: { type: String, required: true },
+		cpf: { type: String, required: true },
+		cellphone: { type: Number, required: true },
 		email: { type: String, required: true, unique: true, lowercase: true },
 		password: { type: String, required: true },
-		cellphone: { type: Number, required: true },
 		address: { type: AddressSchema, required: true },
 		isAdmin: { type: Boolean, required: true },
 	},
