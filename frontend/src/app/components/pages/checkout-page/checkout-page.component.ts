@@ -32,7 +32,12 @@ export class CheckoutPageComponent implements OnInit {
 		let { name, address } = this.userService.currentUser;
 		this.checkoutForm = this.formBuilder.group({
 			name: [name, Validators.required],
-			address: [address, Validators.required],
+			zipCode: [address.zipCode, Validators.required],
+			state: [address.state, Validators.required],
+			city: [address.city, Validators.required],
+			district: [address.district, Validators.required],
+			street: [address.street, Validators.required],
+			residenceNumber: [address.residenceNumber, Validators.required],
 		});
 	}
 
@@ -56,7 +61,12 @@ export class CheckoutPageComponent implements OnInit {
 			return;
 		}
 		this.order.name = this.fc.name.value;
-		this.order.address = this.fc.address.value;
+		this.order.address.zipCode = this.fc.zipCode.value;
+		this.order.address.state = this.fc.state.value;
+		this.order.address.city = this.fc.city.value;
+		this.order.address.district = this.fc.district.value;
+		this.order.address.street = this.fc.street.value;
+		this.order.address.residenceNumber = this.fc.residenceNumber.value;
 
 		this.orderService.create(this.order).subscribe({
 			next: () => {

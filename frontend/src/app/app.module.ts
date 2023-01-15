@@ -31,6 +31,7 @@ import { OrderTrackPageComponent } from './components/pages/order-track-page/ord
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { ProfilePageComponent } from './components/pages/profile-page/profile-page.component';
+import { AddressChipsComponent } from './components/partials/address-chips/address-chips.component';
 
 registerLocaleData(localePt, 'pt');
 
@@ -57,6 +58,7 @@ registerLocaleData(localePt, 'pt');
 		PaypalButtonComponent,
 		OrderTrackPageComponent,
 		ProfilePageComponent,
+		AddressChipsComponent,
 	],
 	imports: [
 		BrowserModule,

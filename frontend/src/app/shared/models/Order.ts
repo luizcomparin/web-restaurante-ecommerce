@@ -6,7 +6,14 @@ export class Order {
 	items!: CartItem[];
 	totalPrice!: number;
 	name!: string;
-	address!: string;
+	address!: {
+		zipCode: string;
+		state: string;
+		city: string;
+		district: string;
+		street: string;
+		residenceNumber: number;
+	};
 	addressLatLng?: LatLng;
 	paymentId!: string;
 	createdAt!: string;
