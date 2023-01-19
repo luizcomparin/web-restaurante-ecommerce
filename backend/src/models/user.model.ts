@@ -1,5 +1,15 @@
 import { model, Schema } from "mongoose";
 
+export interface IAddress {
+	addressLabel: string;
+	zipCode: string;
+	state: string;
+	city: string;
+	district: string;
+	street: string;
+	residenceNumber: number;
+}
+
 export interface User {
 	id: string;
 	name: string;
@@ -7,18 +17,12 @@ export interface User {
 	cellphone: number;
 	email: string;
 	password: string;
-	address: {
-		zipCode: string;
-		state: string;
-		city: string;
-		district: string;
-		street: string;
-		residenceNumber: number;
-	};
+	addresses: IAddress[];
 	isAdmin: boolean;
 }
 
-export const AddressSchema = new Schema({
+export const AddressSchema = new Schema<IAddress>({
+	addressLabel: String,
 	zipCode: String,
 	state: String,
 	city: String,
@@ -34,7 +38,7 @@ export const UserSchema = new Schema<User>(
 		cellphone: { type: Number, required: true },
 		email: { type: String, required: true, unique: true, lowercase: true },
 		password: { type: String, required: true },
-		address: { type: AddressSchema, required: true },
+		addresses: [{ type: AddressSchema, required: true }],
 		isAdmin: { type: Boolean, required: true },
 	},
 	{

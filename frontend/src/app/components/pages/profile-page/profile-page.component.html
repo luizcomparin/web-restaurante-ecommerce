@@ -34,6 +34,13 @@
 				<span class="col-span-3 text-xl p-4 font-bold ">Endereço de entrega</span>
 
 				<text-input
+					[control]="fc.addressLabel"
+					[showErrorsWhen]="isSubmitted"
+					label="Nome do endereço"
+					idInput="addressLabel">
+				</text-input>
+
+				<text-input
 					[control]="fc.zipCode"
 					[showErrorsWhen]="isSubmitted"
 					label="CEP"

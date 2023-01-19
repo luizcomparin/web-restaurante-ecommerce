@@ -50,12 +50,13 @@ router.post(
 			user.name = name;
 			user.cpf = cpf;
 			user.cellphone = cellphone;
-			user.address.zipCode = address.zipCode;
-			user.address.state = address.state;
-			user.address.city = address.city;
-			user.address.district = address.district;
-			user.address.street = address.street;
-			user.address.residenceNumber = address.residenceNumber;
+			user.addresses[0].city = address.zipCode;
+			user.addresses[0].zipCode = address.zipCode;
+			user.addresses[0].state = address.state;
+			user.addresses[0].city = address.city;
+			user.addresses[0].district = address.district;
+			user.addresses[0].street = address.street;
+			user.addresses[0].residenceNumber = address.residenceNumber;
 			await user.save();
 			res.send(
 				generateTokenReponse(user)
@@ -80,7 +81,7 @@ router.post(
 router.post(
 	"/register",
 	asyncHandler(async (req, res) => {
-		const { name, cpf, cellphone, email, password, address } = req.body;
+		const { name, cpf, cellphone, email, password, addresses } = req.body;
 		// Destructuring assignment
 		const user = await UserModel.findOne({ email });
 		if (user) {
@@ -97,7 +98,7 @@ router.post(
 			cellphone,
 			email: email.toLowerCase(),
 			password: encryptedPassword,
-			address,
+			addresses,
 			isAdmin: false,
 		};
 
@@ -125,7 +126,7 @@ const generateTokenReponse = (user: User) => {
 		cpf: user.cpf,
 		cellphone: user.cellphone,
 		email: user.email,
-		address: user.address,
+		addresses: user.addresses,
 		isAdmin: user.isAdmin,
 		token: token,
 	};

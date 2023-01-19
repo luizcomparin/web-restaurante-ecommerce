@@ -26,12 +26,13 @@ export class ProfilePageComponent implements OnInit {
 	cpf = this.userService.currentUser.cpf;
 	email = this.userService.currentUser.email;
 	cellphone = this.userService.currentUser.cellphone;
-	zipCode = this.userService.currentUser.address.zipCode;
-	state = this.userService.currentUser.address.state;
-	city = this.userService.currentUser.address.city;
-	district = this.userService.currentUser.address.district;
-	street = this.userService.currentUser.address.street;
-	residenceNumber = this.userService.currentUser.address.residenceNumber;
+	zipCode = this.userService.currentUser.addresses[0].zipCode;
+	state = this.userService.currentUser.addresses[0].state;
+	city = this.userService.currentUser.addresses[0].city;
+	district = this.userService.currentUser.addresses[0].district;
+	street = this.userService.currentUser.addresses[0].street;
+	residenceNumber = this.userService.currentUser.addresses[0].residenceNumber;
+	addressLabel = this.userService.currentUser.addresses[0].addressLabel;
 
 	ngOnInit(): void {
 		this.updateForm = this.formBuilder.group(
@@ -54,6 +55,7 @@ export class ProfilePageComponent implements OnInit {
 				district: [this.district, Validators.required],
 				street: [this.street, Validators.required],
 				residenceNumber: [this.residenceNumber, Validators.required],
+				addressLabel: [this.addressLabel, Validators.required],
 			},
 			{
 				validators: PasswordsMatchValidator(
@@ -83,14 +85,17 @@ export class ProfilePageComponent implements OnInit {
 			cpf: fv.cpf,
 			email: fv.email,
 			cellphone: fv.cellphone,
-			address: {
-				zipCode: fv.zipCode,
-				state: fv.state,
-				city: fv.city,
-				district: fv.district,
-				street: fv.street,
-				residenceNumber: fv.residenceNumber,
-			},
+			addresses: [
+				{
+					addressLabel: fv.addressLabel,
+					zipCode: fv.zipCode,
+					state: fv.state,
+					city: fv.city,
+					district: fv.district,
+					street: fv.street,
+					residenceNumber: fv.residenceNumber,
+				},
+			],
 		};
 
 		this.userService.update(user).subscribe((_) => {

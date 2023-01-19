@@ -1,17 +1,14 @@
+// import { IAddress } from "../interfaces/IAddress";
+
+import { IAddress } from '../interfaces/IAddress';
+
 export class User {
 	id!: string;
 	name!: string;
 	cpf!: string;
 	cellphone!: number;
 	email!: string;
-	address!: {
-		zipCode: string;
-		state: string;
-		city: string;
-		district: string;
-		street: string;
-		residenceNumber: number;
-	};
+	addresses!: IAddress[];
 	token!: string;
 	isAdmin!: boolean;
 }

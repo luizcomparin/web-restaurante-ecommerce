@@ -5,9 +5,31 @@
 		<app-title title="Pedido" fontSize="1.6rem"></app-title>
 		<form [formGroup]="checkoutForm" class="flex flex-col w-full">
 			<text-input [control]="fc.name" label="Nome"></text-input>
-			<text-input [control]="fc.address" label="Endereço"></text-input>
+			<div class="border rounded-xl p-3 pb-0">
+				<div class=" flex justify-between items-center pt-0 p-3">
+					<span>Entregar em </span>
+					<mat-button-toggle-group appearance="legacy" [value]="addresses[0]" (change)="toggleAddress($event.value)">
+						<mat-button-toggle disableRipple *ngFor="let address of addresses" [value]="address">{{ address }}</mat-button-toggle>
+						<!-- <div *ngFor="let address of addresses" class="w-full h-full">
+							<mat-button-toggle [value]="address" *ngIf="checked" class="w-full h-full">{{ address }}</mat-button-toggle>
+							<mat-button-toggle [value]="address" *ngIf="!checked" class="w-full h-full">{{ address }}</mat-button-toggle>
+						</div> -->
+						<!-- {{funcValue}} -->
+					</mat-button-toggle-group>
+				</div>
+
+				<div class="grid grid-cols-3">
+					<text-input [control]="fc.zipCode" label="Endereço"></text-input>
+					<text-input [control]="fc.state" label="Endereço"></text-input>
+					<text-input [control]="fc.city" label="Endereço"></text-input>
+					<text-input [control]="fc.district" label="Endereço"></text-input>
+					<text-input [control]="fc.street" label="Endereço"></text-input>
+					<text-input [control]="fc.residenceNumber" label="Endereço"></text-input>
+				</div>
+			</div>
 		</form>
 		<order-items-list [order]="order"></order-items-list>
+
 	</div>
 	<div>
 		<!--map-->

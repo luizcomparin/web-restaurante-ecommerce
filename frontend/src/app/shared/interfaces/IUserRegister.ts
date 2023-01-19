@@ -1,3 +1,7 @@
+// import { IAddress } from "./IAddress";
+
+import { IAddress } from './IAddress';
+
 export interface IUserRegister {
 	name: string;
 	cpf: string;
@@ -5,12 +9,5 @@ export interface IUserRegister {
 	email: string;
 	password: string;
 	confirmPassword: string;
-	address: {
-		zipCode: string;
-		state: string;
-		city: string;
-		district: string;
-		street: string;
-		residenceNumber: number;
-	};
+	addresses: IAddress[];
 }

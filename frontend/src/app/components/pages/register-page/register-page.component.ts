@@ -40,6 +40,7 @@ export class RegisterPageComponent implements OnInit {
 				district: ['', Validators.required],
 				street: ['', Validators.required],
 				residenceNumber: ['', Validators.required],
+				addressLabel: ['Casa', Validators.required],
 			},
 			{
 				validators: PasswordsMatchValidator(
@@ -68,14 +69,17 @@ export class RegisterPageComponent implements OnInit {
 			cellphone: fv.cellphone,
 			password: fv.password,
 			confirmPassword: fv.confirmPassword,
-			address: {
-				zipCode: fv.zipCode,
-				state: fv.state,
-				city: fv.city,
-				district: fv.district,
-				street: fv.street,
-				residenceNumber: fv.residenceNumber,
-			},
+			addresses: [
+				{
+					addressLabel: fv.addressLabel,
+					zipCode: fv.zipCode,
+					state: fv.state,
+					city: fv.city,
+					district: fv.district,
+					street: fv.street,
+					residenceNumber: fv.residenceNumber,
+				},
+			],
 		};
 
 		this.userService.register(user).subscribe((_) => {

@@ -39,6 +39,7 @@ export class TextInputComponent implements OnInit, OnChanges {
 	}
 
 	ngOnInit(): void {
+		// console.log(this.control.errors);
 		this.control.statusChanges.subscribe(() => {
 			this.checkValidation();
 		});
