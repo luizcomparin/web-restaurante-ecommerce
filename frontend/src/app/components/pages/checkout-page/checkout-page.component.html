@@ -18,14 +18,20 @@
 					</mat-button-toggle-group>
 				</div>
 
-				<div class="grid grid-cols-3">
-					<text-input [control]="fc.zipCode" label="Endereço"></text-input>
-					<text-input [control]="fc.state" label="Endereço"></text-input>
-					<text-input [control]="fc.city" label="Endereço"></text-input>
-					<text-input [control]="fc.district" label="Endereço"></text-input>
-					<text-input [control]="fc.street" label="Endereço"></text-input>
-					<text-input [control]="fc.residenceNumber" label="Endereço"></text-input>
+				<div class="grid grid-cols-3 gap-x-2">
+					<!-- Inputs -->
+					<text-input [control]="fc.zipCode" label="CEP" idInput="cep"></text-input>
+					<text-input [control]="fc.state" label="Estado" idInput="estado"></text-input>
+					<text-input [control]="fc.city" label="Cidade" idInput="cidade"></text-input>
+					<text-input [control]="fc.district" label="Bairro" idInput="bairro"></text-input>
+					<text-input [control]="fc.street" label="Rua" idInput="rua"></text-input>
+					<text-input [control]="fc.residenceNumber" label="Numero" idInput="numero"></text-input>
 				</div>
+
+				<!-- <div class="grid grid-cols-3 gap-x-2"> -->
+				<!-- Labels -->
+				<!-- <span>{{  }}</span> -->
+				<!-- </div> -->
 			</div>
 		</form>
 		<order-items-list [order]="order"></order-items-list>

@@ -6,7 +6,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { OrderService } from 'src/app/services/order.service';
 import { UserService } from 'src/app/services/user.service';
 import { IAddress } from 'src/app/shared/interfaces/IAddress';
-import { Order } from 'src/app/shared/models/Order';
+import { Address, Order } from 'src/app/shared/models/Order';
 
 @Component({
 	selector: 'app-checkout-page',
@@ -60,6 +60,7 @@ export class CheckoutPageComponent implements OnInit {
 		const cart = cartService.getCart();
 		this.order.items = cart.items;
 		this.order.totalPrice = cart.totalPrice;
+		// this.order.address = new Address();
 	}
 
 	ngOnInit(): void {
@@ -106,12 +107,18 @@ export class CheckoutPageComponent implements OnInit {
 			return;
 		}
 		this.order.name = this.fc.name.value;
+		console.log(this.order.name);
+		console.log(this.fc.zipCode.value);
+		console.log(this.order.address.zipCode);
+		this.order.address.addressLabel = this.addressLabel;
 		this.order.address.zipCode = this.fc.zipCode.value;
 		this.order.address.state = this.fc.state.value;
 		this.order.address.city = this.fc.city.value;
 		this.order.address.district = this.fc.district.value;
 		this.order.address.street = this.fc.street.value;
 		this.order.address.residenceNumber = this.fc.residenceNumber.value;
+
+		console.log(this.order);
 
 		this.orderService.create(this.order).subscribe({
 			next: () => {

@@ -5,14 +5,51 @@
 		<app-title title="Resumo do pedido" fontSize="1.6rem"></app-title>
 		<div>
 			<!--summary-->
-			<div class="flex mt-[0.7rem] ">
+			<div class="flex my-[0.7rem] ">
 				<h3 class="mr-4 basis-20"> Nome: </h3>
 				<span class="text-[1.2rem] ">{{ order.name }}</span>
 			</div>
-			<div class="flex mt-[0.7rem] ">
-				<h3 class="mr-4 basis-20"> Endereço: </h3>
-				<span class="text-[1.2rem] ">{{ order.address }}</span>
+
+			<div class="border rounded-xl p-4">
+				<div class=" font-semibold text-[19px] flex justify-center items-center pt-0 p-4">
+					<span>Entregar em </span>
+					<h3 class="ml-2 font-bold text-primary">{{ order.address.addressLabel }}</h3>
+				</div>
+
+				<div class="grid justify-between grid-cols-3 gap-y-4">
+					<!-- Inputs -->
+					<span class="flex flex-col">
+						<span class="text-xs font-bold">CEP: </span>
+						{{ order.address.zipCode }}
+					</span>
+					<span class="flex flex-col">
+						<span class="flex text-xs font-bold">Estado: </span>
+						{{ order.address.state }}
+					</span>
+					<span class=" flex flex-col">
+						<span class="flex text-xs font-bold">Cidade: </span>
+						{{ order.address.city }}
+					</span>
+					<span class=" ">
+						<h3 class="flex text-xs font-bold">Bairro: </h3>
+						{{ order.address.district }}
+					</span>
+					<span class=" ">
+						<h3 class="text-xs font-bold">Rua: </h3>
+						{{ order.address.street }}
+					</span>
+					<span class=" ">
+						<h3 class="text-xs font-bold">Numero: </h3>
+						{{ order.address.residenceNumber }}
+					</span>
+				</div>
+
+				<!-- <div class="grid grid-cols-3 gap-x-2"> -->
+				<!-- Labels -->
+				<!-- <span>{{  }}</span> -->
+				<!-- </div> -->
 			</div>
+
 		</div>
 		<order-items-list [order]="order"></order-items-list>
 	</div>

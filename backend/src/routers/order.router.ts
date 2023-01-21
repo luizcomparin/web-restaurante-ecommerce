@@ -11,6 +11,7 @@ router.post(
 	"/create",
 	asyncHandler(async (req: any, res: any) => {
 		const requestOrder = req.body;
+		console.log(requestOrder);
 
 		if (requestOrder.items.length <= 0) {
 			res.status(HTTP_BAD_REQUEST).send("O carrinho está vazio.");

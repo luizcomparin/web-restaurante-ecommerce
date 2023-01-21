@@ -50,7 +50,7 @@ router.post(
 			user.name = name;
 			user.cpf = cpf;
 			user.cellphone = cellphone;
-			user.addresses[0].city = address.zipCode;
+			user.addresses[0].addressLabel = address.addressLabel;
 			user.addresses[0].zipCode = address.zipCode;
 			user.addresses[0].state = address.state;
 			user.addresses[0].city = address.city;

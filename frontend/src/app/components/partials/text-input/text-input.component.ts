@@ -25,19 +25,6 @@ export class TextInputComponent implements OnInit, OnChanges {
 	showError: boolean = false;
 	errorMessages: string[] = [];
 
-	hideValue() {
-		if (this.hideableValue) {
-			this.hidden = !this.hidden;
-			if (this.type == 'text') return (this.type = 'password');
-			if (this.type == 'password') return (this.type = 'text');
-		}
-		return;
-	}
-
-	get formControl() {
-		return this.control as FormControl;
-	}
-
 	ngOnInit(): void {
 		// console.log(this.control.errors);
 		this.control.statusChanges.subscribe(() => {
@@ -50,6 +37,19 @@ export class TextInputComponent implements OnInit, OnChanges {
 
 	ngOnChanges(): void {
 		this.checkValidation();
+	}
+
+	hideValue() {
+		if (this.hideableValue) {
+			this.hidden = !this.hidden;
+			if (this.type == 'text') return (this.type = 'password');
+			if (this.type == 'password') return (this.type = 'text');
+		}
+		return;
+	}
+
+	get formControl() {
+		return this.control as FormControl;
 	}
 
 	checkValidation() {
