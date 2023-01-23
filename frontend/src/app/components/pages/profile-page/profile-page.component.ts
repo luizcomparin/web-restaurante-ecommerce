@@ -44,8 +44,8 @@ export class ProfilePageComponent implements OnInit {
 				cpf: [this.cpf, [Validators.required, Validators.minLength(5)]],
 				email: [this.email, [Validators.required, Validators.email]],
 				cellphone: [this.cellphone, [Validators.required]],
-				password: ['', [Validators.required, Validators.minLength(5)]],
-				confirmPassword: ['', Validators.required],
+				// password: ['', [Validators.required, Validators.minLength(5)]],
+				// confirmPassword: ['', Validators.required],
 				zipCode: [
 					this.zipCode,
 					[Validators.required, Validators.minLength(8)],
@@ -85,17 +85,15 @@ export class ProfilePageComponent implements OnInit {
 			cpf: fv.cpf,
 			email: fv.email,
 			cellphone: fv.cellphone,
-			addresses: [
-				{
-					addressLabel: fv.addressLabel,
-					zipCode: fv.zipCode,
-					state: fv.state,
-					city: fv.city,
-					district: fv.district,
-					street: fv.street,
-					residenceNumber: fv.residenceNumber,
-				},
-			],
+			address: {
+				addressLabel: fv.addressLabel,
+				zipCode: fv.zipCode,
+				state: fv.state,
+				city: fv.city,
+				district: fv.district,
+				street: fv.street,
+				residenceNumber: fv.residenceNumber,
+			},
 		};
 
 		this.userService.update(user).subscribe((_) => {

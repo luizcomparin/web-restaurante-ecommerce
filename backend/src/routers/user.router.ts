@@ -43,25 +43,36 @@ router.post(
 	asyncHandler(async (req, res) => {
 		const { name, cpf, cellphone, email, address } = req.body;
 		// Destructuring assignment
-		const user = await UserModel.findOne({ email });
+		const user: User | null = await UserModel.findOne({ email });
+		console.log(user?.addresses);
+
 		// const current_user = localStorage.getItem(email);
 		// UserModel.updateOne(email:email,)
+
+		// console.log("novo endereço");
+		// 			user.addresses.push(address);
+
+		const liStadeSting: string[] = [];
+
 		if (user) {
 			user.name = name;
 			user.cpf = cpf;
 			user.cellphone = cellphone;
-			user.addresses[0].addressLabel = address.addressLabel;
-			user.addresses[0].zipCode = address.zipCode;
-			user.addresses[0].state = address.state;
-			user.addresses[0].city = address.city;
-			user.addresses[0].district = address.district;
-			user.addresses[0].street = address.street;
-			user.addresses[0].residenceNumber = address.residenceNumber;
-			await user.save();
+			user.addresses.forEach((element) => {
+				liStadeSting.push(element.addressLabel);
+			});
+			if (!liStadeSting.includes(address.addressLabel)) {
+                
+				user.addresses.push(address);
+			} else {
+                user.addresses.
+            }
+			await UserModel.create(user);
+
 			res.send(
 				generateTokenReponse(user)
 				// [{
-				// 	"db.address": user,
+				//     "db.address": user,
 				// },
 				// { "req.address": req.body }]
 			);
