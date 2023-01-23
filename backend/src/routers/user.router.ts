@@ -61,12 +61,12 @@ router.post(
 			user.addresses.forEach((element) => {
 				liStadeSting.push(element.addressLabel);
 			});
-			if (!liStadeSting.includes(address.addressLabel)) {
-                
+			let adressindex = liStadeSting.indexOf(address.addressLabel);
+			if (adressindex == -1) {
 				user.addresses.push(address);
 			} else {
-                user.addresses.
-            }
+				user.addresses[adressindex] = address;
+			}
 			await UserModel.create(user);
 
 			res.send(
