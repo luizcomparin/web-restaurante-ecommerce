@@ -60,5 +60,28 @@ a{
     text-decoration: none;
 }
 
+//#SCROLLBAR CONFIG
+::-webkit-scrollbar {
+	width: 9px;
+	/* width of the entire scrollbar */
+	height: 9px;
+}
+
+*::-webkit-scrollbar-track {
+	background: rgba(0, 46, 52, 0.25);
+	/* color of the tracking area */
+	border-radius: 20px;
+}
+
+*::-webkit-scrollbar-thumb {
+	background-color: #a8a8a8;
+	/* color of the scroll thumb */
+	border-radius: 5px;
+	/* roundness of the scroll thumb */
+	/* border: 3px solid 002e34;   creates padding around scroll thumb */
+}
+//#END SCROLLBAR CONFIG
+
+
 // html, body { height: 100%; }
 // body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

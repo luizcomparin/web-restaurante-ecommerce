@@ -8,14 +8,13 @@
 			<div class="border rounded-xl p-3 pb-0">
 				<div class=" flex justify-between items-center pt-0 p-3">
 					<span>Entregar em </span>
-					<mat-button-toggle-group appearance="legacy" [value]="addresses[0]" (change)="toggleAddress($event.value)">
-						<mat-button-toggle disableRipple *ngFor="let address of addresses" [value]="address">{{ address }}</mat-button-toggle>
-						<!-- <div *ngFor="let address of addresses" class="w-full h-full">
-							<mat-button-toggle [value]="address" *ngIf="checked" class="w-full h-full">{{ address }}</mat-button-toggle>
-							<mat-button-toggle [value]="address" *ngIf="!checked" class="w-full h-full">{{ address }}</mat-button-toggle>
-						</div> -->
-						<!-- {{funcValue}} -->
-					</mat-button-toggle-group>
+
+					<drag-scroll class="w-full max-w-[400px]">
+						<mat-button-toggle-group appearance="legacy" [value]="addresses[0]" (change)="toggleAddress($event.value)">
+							<mat-button-toggle disableRipple *ngFor="let address of addresses" [value]="address">{{ address }}</mat-button-toggle>
+						</mat-button-toggle-group>
+					</drag-scroll>
+
 				</div>
 
 				<div class="grid grid-cols-3 gap-x-2">

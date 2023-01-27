@@ -1,7 +1,7 @@
 <div class="flex justify-center items-center   ">
 	<div class="flex flex-col gap-4  ">
 		<app-title title="Meus dados" class="mt-4"></app-title>
-		<form [formGroup]="updateForm" (ngSubmit)="submit()" class="">
+		<form (change)="getAndUpdateAddress()" [formGroup]="updateForm" (ngSubmit)="submit()" class="">
 
 			<section class="grid grid-cols-3 gap-4 p-4 pt-0 border-b">
 				<!--Informacoes pessoais e de contato-->
@@ -29,16 +29,34 @@
 			</section>
 
 
-			<section class="grid grid-cols-3 gap-4 p-4 border-b">
+			<section class=" grid grid-cols-3 gap-4 p-4 border-b max-w-[800px] items-center">
 				<!--Endereco de entrega-->
-				<span class="col-span-3 text-xl p-4 font-bold ">Endereço de entrega</span>
+				<div class=" col-span-3 flex justify-between items-center pt-0 p-0">
+					<span class=" flex text-xl p-4 font-bold ">Endereços de entrega</span>
+					<span class=" flex text-base p-2 font-medium text-primary cursor-pointer hover:font-semibold">Adicionar endereço</span>
+					<span class=" flex text-base p-2 font-medium text-primary cursor-pointer hover:font-semibold">Renomear endereço selecionado</span>
+				</div>
 
-				<text-input
+				<div class=" col-span-3 flex justify-center w-full items-center pt-0 p-0">
+
+					<drag-scroll class=" flex w-fit max-w-[717px] mb-4 ">
+						<mat-button-toggle-group
+							appearance="legacy"
+							[value]="addressLabelList[0]"
+							(change)="toggleAddress($event.value);this.addressLabel = $event.value">
+							<mat-button-toggle disableRipple *ngFor="let address of addressLabelList" [value]="address">
+								{{ address }}
+							</mat-button-toggle>
+						</mat-button-toggle-group>
+					</drag-scroll>
+
+				</div>
+				<!-- <text-input
 					[control]="fc.addressLabel"
 					[showErrorsWhen]="isSubmitted"
 					label="Nome do endereço"
 					idInput="addressLabel">
-				</text-input>
+				</text-input> -->
 
 				<text-input
 					[control]="fc.zipCode"
@@ -115,5 +133,8 @@
 
 			<default-button text="Salvar"></default-button>
 		</form>
+		<button (click)="getAndUpdateAddress()">get from storage</button>
+		<button (click)="saveToLocalStorage()">save to storage</button>
+
 	</div>
 </div>

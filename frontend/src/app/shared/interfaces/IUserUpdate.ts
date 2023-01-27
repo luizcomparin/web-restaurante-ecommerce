@@ -7,5 +7,5 @@ export interface IUserUpdate {
 	cpf: string;
 	cellphone: number;
 	email: string;
-	address: IAddress;
+	addresses: IAddress[];
 }

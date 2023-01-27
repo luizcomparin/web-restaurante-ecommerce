@@ -22,6 +22,7 @@
     "@angular/router": "^15.0.0",
     "leaflet": "^1.9.3",
     "ng-starrating": "^1.0.20",
+    "ngx-drag-scroll": "^14.0.1",
     "ngx-toastr": "^16.0.1",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

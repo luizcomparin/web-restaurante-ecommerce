@@ -31,7 +31,22 @@ import { OrderTrackPageComponent } from './components/pages/order-track-page/ord
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { ProfilePageComponent } from './components/pages/profile-page/profile-page.component';
-import { MaterialModule } from './material.module';
+import { DragScrollModule } from 'ngx-drag-scroll';
+
+// Angular Material Components imports
+import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
+const MaterialComponents = [
+	MatButtonModule,
+	MatButtonToggleModule,
+	MatChipsModule,
+	MatIconModule,
+	MatFormFieldModule,
+];
 
 registerLocaleData(localePt, 'pt');
 
@@ -66,7 +81,8 @@ registerLocaleData(localePt, 'pt');
 		RatingModule,
 		HttpClientModule,
 		ReactiveFormsModule,
-		MaterialModule,
+		DragScrollModule,
+		MaterialComponents,
 		ToastrModule.forRoot({
 			timeOut: 5000,
 			positionClass: 'toast-bottom-right',

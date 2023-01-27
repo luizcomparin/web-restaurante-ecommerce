@@ -33,6 +33,7 @@ export class UserService {
 	}
 
 	public get currentUser(): User {
+		this.userSubject.next(this.getUserFromLocalStorage());
 		return this.userSubject.value;
 	}
 

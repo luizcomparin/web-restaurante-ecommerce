@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { IAddress } from 'src/app/shared/interfaces/IAddress';
 import { IUserUpdate } from 'src/app/shared/interfaces/IUserUpdate';
+import { User } from 'src/app/shared/models/User';
 import { PasswordsMatchValidator } from 'src/app/shared/validators/password_match_valitador';
 
 @Component({
@@ -18,43 +20,147 @@ export class ProfilePageComponent implements OnInit {
 		private router: Router
 	) {}
 
-	updateForm!: FormGroup;
+	ngOnInit(): void {
+		this.oldUserData;
+		this.toggleAddress();
+		this.createUpdateForm();
+
+		this.returnUrl = this.activatedRoute.snapshot.queryParams.returnUrl;
+	}
+
 	isSubmitted = false;
 	returnUrl = '';
 
-	name = this.userService.currentUser.name;
-	cpf = this.userService.currentUser.cpf;
-	email = this.userService.currentUser.email;
-	cellphone = this.userService.currentUser.cellphone;
-	zipCode = this.userService.currentUser.addresses[0].zipCode;
-	state = this.userService.currentUser.addresses[0].state;
-	city = this.userService.currentUser.addresses[0].city;
-	district = this.userService.currentUser.addresses[0].district;
-	street = this.userService.currentUser.addresses[0].street;
-	residenceNumber = this.userService.currentUser.addresses[0].residenceNumber;
-	addressLabel = this.userService.currentUser.addresses[0].addressLabel;
+	// Alias for HTML
+	get fc() {
+		return this.updateForm.controls;
+	}
 
-	ngOnInit(): void {
+	// toggleAddress() (address selector) variables
+	addressLabelList: string[] = this.userService.currentUser.addresses.map(
+		(value) => value.addressLabel
+	);
+	selectedAddress!: IAddress;
+
+	// Form variables
+	updateForm!: FormGroup;
+	addressLabel!: string;
+
+	get oldUserData(): User {
+		return JSON.parse(localStorage.getItem('User')!);
+	}
+
+	currentUserData: User = this.oldUserData;
+
+	// Only returns the updated selectedAddress
+	updatedAddress(): IAddress {
+		const formValue = this.updateForm.value;
+
+		return {
+			addressLabel: formValue.addressLabel,
+			zipCode: formValue.zipCode,
+			state: formValue.state,
+			city: formValue.city,
+			district: formValue.district,
+			street: formValue.street,
+			residenceNumber: formValue.residenceNumber,
+		};
+	}
+
+	// Only returns the updated currentUser
+	updatedUser(): IUserUpdate {
+		const formValue = this.updateForm.value;
+
+		return {
+			name: formValue.name,
+			cpf: formValue.cpf,
+			email: formValue.email,
+			cellphone: formValue.cellphone,
+			addresses: this.currentUserData.addresses,
+		};
+	}
+
+	getAndUpdateAddress(): User {
+		const user = this.currentUserData;
+		const formValue = this.updateForm.value;
+
+		user.name = formValue.name;
+		user.cpf = formValue.cpf;
+		user.email = formValue.email;
+		user.cellphone = formValue.cellphone;
+
+		user.addresses = user.addresses.map((address) => {
+			if (address.addressLabel === this.addressLabel) {
+				// return { ...address, street: 'new street' };
+				return this.updatedAddress();
+			}
+			return address;
+		});
+		console.log('Updated User: ', user);
+		return user;
+	}
+
+	toggleAddress(address: string = this.addressLabelList[0]) {
+		this.addressLabel = address;
+		// console.log(
+		// 	'addressLabel: ',
+		// 	this.addressLabel,
+		// 	'addressLabelList: ',
+		// 	this.addressLabelList
+		// );
+
+		for (
+			let index = 0;
+			index < this.currentUserData.addresses.length;
+			index++
+		) {
+			if (
+				this.addressLabel ==
+				this.currentUserData.addresses[index].addressLabel
+			) {
+				this.selectedAddress = this.currentUserData.addresses[index];
+			}
+		}
+
+		// console.log('selectedAddress: ', this.selectedAddress);
+		// console.log('currentUserData: ', this.currentUserData);
+
+		this.createUpdateForm();
+	}
+
+	createUpdateForm() {
 		this.updateForm = this.formBuilder.group(
 			{
 				name: [
-					this.name,
+					this.currentUserData.name,
 					[Validators.required, Validators.minLength(5)],
 				],
-				cpf: [this.cpf, [Validators.required, Validators.minLength(5)]],
-				email: [this.email, [Validators.required, Validators.email]],
-				cellphone: [this.cellphone, [Validators.required]],
+				cpf: [
+					this.currentUserData.cpf,
+					[Validators.required, Validators.minLength(5)],
+				],
+				email: [
+					this.currentUserData.email,
+					[Validators.required, Validators.email],
+				],
+				cellphone: [
+					this.currentUserData.cellphone,
+					[Validators.required],
+				],
 				// password: ['', [Validators.required, Validators.minLength(5)]],
 				// confirmPassword: ['', Validators.required],
 				zipCode: [
-					this.zipCode,
+					this.selectedAddress.zipCode,
 					[Validators.required, Validators.minLength(8)],
 				],
-				state: [this.state, Validators.required],
-				city: [this.city, Validators.required],
-				district: [this.district, Validators.required],
-				street: [this.street, Validators.required],
-				residenceNumber: [this.residenceNumber, Validators.required],
+				state: [this.selectedAddress.state, Validators.required],
+				city: [this.selectedAddress.city, Validators.required],
+				district: [this.selectedAddress.district, Validators.required],
+				street: [this.selectedAddress.street, Validators.required],
+				residenceNumber: [
+					this.selectedAddress.residenceNumber,
+					Validators.required,
+				],
 				addressLabel: [this.addressLabel, Validators.required],
 			},
 			{
@@ -64,12 +170,13 @@ export class ProfilePageComponent implements OnInit {
 				),
 			}
 		);
-
-		this.returnUrl = this.activatedRoute.snapshot.queryParams.returnUrl;
 	}
 
-	get fc() {
-		return this.updateForm.controls;
+	saveToLocalStorage() {
+		localStorage.setItem(
+			'User',
+			JSON.stringify(this.getAndUpdateAddress())
+		);
 	}
 
 	submit() {
@@ -79,30 +186,8 @@ export class ProfilePageComponent implements OnInit {
 			return;
 		}
 
-		const fv = this.updateForm.value;
-		const user: IUserUpdate = {
-			name: fv.name,
-			cpf: fv.cpf,
-			email: fv.email,
-			cellphone: fv.cellphone,
-			address: {
-				addressLabel: fv.addressLabel,
-				zipCode: fv.zipCode,
-				state: fv.state,
-				city: fv.city,
-				district: fv.district,
-				street: fv.street,
-				residenceNumber: fv.residenceNumber,
-			},
-		};
-
-		this.userService.update(user).subscribe((_) => {
+		this.userService.update(this.updatedUser()).subscribe((_) => {
 			this.router.parseUrl(this.returnUrl);
 		});
-
-		// Reload necessário para pegar o token no Header
-		// window.location.reload();
 	}
-
-	// comitar():any => {this.userService.update()}
 }

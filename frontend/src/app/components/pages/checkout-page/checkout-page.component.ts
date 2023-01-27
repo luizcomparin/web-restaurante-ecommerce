@@ -21,7 +21,6 @@ export class CheckoutPageComponent implements OnInit {
 	addresses: string[] = this.userService.currentUser.addresses.map(
 		(value) => value.addressLabel
 	); // Stores all addresess's 'addressLabel'
-
 	addressLabel!: string; // Stores the selected address's 'addressLabel'
 	selectedAddress!: IAddress; // Stores the selected address whole object
 
@@ -40,7 +39,6 @@ export class CheckoutPageComponent implements OnInit {
 			) {
 				this.selectedAddress =
 					this.userService.currentUser.addresses[index];
-				// break;
 			}
 		}
 		console.log(this.selectedAddress);
