@@ -52,7 +52,9 @@ export class ProfilePageComponent implements OnInit {
 
 	currentUserData: User = this.oldUserData;
 
-	// Only returns the updated selectedAddress
+	//==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==//
+
+	// Simply returns the updated selectedAddress
 	updatedAddress(): IAddress {
 		const formValue = this.updateForm.value;
 
@@ -67,20 +69,23 @@ export class ProfilePageComponent implements OnInit {
 		};
 	}
 
-	// Only returns the updated currentUser
-	updatedUser(): IUserUpdate {
-		const formValue = this.updateForm.value;
+	//==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==//
 
+	// Simply returns the updated currentUser
+	updatedUser(): IUserUpdate {
 		return {
-			name: formValue.name,
-			cpf: formValue.cpf,
-			email: formValue.email,
-			cellphone: formValue.cellphone,
+			oldEmail: this.oldUserData.email,
+			name: this.currentUserData.name,
+			cpf: this.currentUserData.cpf,
+			email: this.currentUserData.email,
+			cellphone: this.currentUserData.cellphone,
 			addresses: this.currentUserData.addresses,
 		};
 	}
 
-	getAndUpdateAddress(): User {
+	//==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==//
+
+	getAndUpdateUser(): User {
 		const user = this.currentUserData;
 		const formValue = this.updateForm.value;
 
@@ -97,8 +102,12 @@ export class ProfilePageComponent implements OnInit {
 			return address;
 		});
 		console.log('Updated User: ', user);
+		console.log('currentUserData: ', this.currentUserData);
+		console.log('updatedUser(): ', this.updatedUser());
 		return user;
 	}
+
+	//==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==//
 
 	toggleAddress(address: string = this.addressLabelList[0]) {
 		this.addressLabel = address;
@@ -127,6 +136,8 @@ export class ProfilePageComponent implements OnInit {
 
 		this.createUpdateForm();
 	}
+
+	//==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==//
 
 	createUpdateForm() {
 		this.updateForm = this.formBuilder.group(
@@ -172,12 +183,13 @@ export class ProfilePageComponent implements OnInit {
 		);
 	}
 
+	//==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==//
+
 	saveToLocalStorage() {
-		localStorage.setItem(
-			'User',
-			JSON.stringify(this.getAndUpdateAddress())
-		);
+		localStorage.setItem('User', JSON.stringify(this.getAndUpdateUser()));
 	}
+
+	//==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==//
 
 	submit() {
 		this.isSubmitted = true;

@@ -2,9 +2,10 @@ import { Router } from "express";
 import { sample_users } from "../data";
 import jwt from "jsonwebtoken";
 import asyncHandler from "express-async-handler";
-import { User, UserModel } from "../models/user.model";
+import { IAddress, IUser, UserModel } from "../models/user.model";
 import { HTTP_BAD_REQUEST } from "../constants/http_status";
 import bcrypt from "bcryptjs";
+import { Request, Response } from "express";
 
 const router = Router();
 
@@ -38,52 +39,41 @@ router.post(
 	})
 );
 
+interface IUserUpdate {
+	oldEmail: string;
+	name: string;
+	cpf: string;
+	cellphone: number;
+	email: string;
+	addresses: IAddress[];
+}
+
 router.post(
 	"/update",
-	asyncHandler(async (req, res) => {
-		const { name, cpf, cellphone, email, address } = req.body;
+	asyncHandler(async (req: Request<{}, {}, IUserUpdate>, res: Response) => {
+		const { oldEmail, name, cpf, cellphone, email, addresses } = req.body;
 		// Destructuring assignment
-		const user: User | null = await UserModel.findOne({ email });
-		console.log(user?.addresses);
+		const dbUser = await UserModel.findOne({
+			email: oldEmail,
+		});
 
-		// const current_user = localStorage.getItem(email);
-		// UserModel.updateOne(email:email,)
-
-		// console.log("novo endereço");
-		// user.addresses.push(address);
-
-		const liStadeSting: string[] = [];
-
-		if (user) {
-			user.name = name;
-			user.cpf = cpf;
-			user.cellphone = cellphone;
-			user.addresses.forEach((element) => {
-				liStadeSting.push(element.addressLabel);
-			});
-			let adressindex = liStadeSting.indexOf(address.addressLabel);
-			if (adressindex == -1) {
-				user.addresses.push(address);
-			} else {
-				user.addresses[adressindex] = address;
-			}
-			await UserModel.create(user);
-
-			res.send(
-				generateTokenReponse(user)
-				// [{
-				//     "db.address": user,
-				// },
-				// { "req.address": req.body }]
-			);
-			// Só falta agora salvar o req.body no User
-
-			// console.log("LS user: ", current_user);
+		if (dbUser) {
+			// console.log("oldEmail: ", oldEmail);
+			// console.log("dbUser: ", dbUser);
 			// console.log("req.body: ", req.body);
-			// console.log("req.params: ", req.params);
+
+			dbUser.name = name;
+			dbUser.cpf = cpf;
+			dbUser.cellphone = cellphone;
+			dbUser.email = email;
+			dbUser.addresses = addresses;
+
+			await dbUser.save();
+
+			res.send(generateTokenReponse(dbUser));
 			return;
 		} else {
-			res.send({ message: "nao tem email assim no banco" });
+			res.send({ message: "Email não encontrado" });
 			return;
 		}
 	})
@@ -102,7 +92,7 @@ router.post(
 
 		const encryptedPassword = await bcrypt.hash(password, 10);
 
-		const newUser: User = {
+		const newUser: IUser = {
 			id: "",
 			name,
 			cpf,
@@ -118,7 +108,7 @@ router.post(
 	})
 );
 
-const generateTokenReponse = (user: User) => {
+const generateTokenReponse = (user: IUser) => {
 	const token = jwt.sign(
 		{
 			id: user.id,

@@ -40,38 +40,57 @@
 
 // router.post(
 // 	"/update",
-// 	asyncHandler(async (req, res) => {
-// 		const { name, cpf, cellphone, email, address } = req.body;
+// 	asyncHandler(async (req: Request<{}, {}, IUserUpdate>, res: Response) => {
+// 		const { oldEmail, name, cpf, cellphone, email, addresses } = req.body;
 // 		// Destructuring assignment
-// 		const user = await UserModel.findOne({ email });
+// 		const dbUser = await UserModel.findOne({
+// 			email: oldEmail,
+// 		});
+
 // 		// const current_user = localStorage.getItem(email);
 // 		// UserModel.updateOne(email:email,)
-// 		if (user) {
-// 			user.name = name;
-// 			user.cpf = cpf;
-// 			user.cellphone = cellphone;
-// 			console.log("add: " + user.addresses[0].addressLabel);
-// 			console.log("addBody: " + address);
-// 			user.addresses[0].addressLabel = address.addressLabel;
-// 			user.addresses[0].zipCode = address.zipCode;
-// 			user.addresses[0].state = address.state;
-// 			user.addresses[0].city = address.city;
-// 			user.addresses[0].district = address.district;
-// 			user.addresses[0].street = address.street;
-// 			user.addresses[0].residenceNumber = address.residenceNumber;
-// 			await user.save();
+
+// 		// console.log("novo endereço");
+// 		// user.addresses.push(address);
+
+// 		const liStadeSting: string[] = [];
+
+// 		if (dbUser) {
+// 			console.log("oldEmail: ", oldEmail);
+// 			console.log("dbUser: ", dbUser);
+// 			console.log("req.body: ", req.body);
+
+// 			dbUser.name = name;
+// 			dbUser.cpf = cpf;
+// 			dbUser.cellphone = cellphone;
+// 			dbUser.email = email;
+// 			dbUser.addresses = addresses;
+
+// 			await dbUser.save();
+
+// 			// user.name = name;
+// 			// user.cpf = cpf;
+// 			// user.cellphone = cellphone;
+// 			// user.addresses.forEach((element) => {
+// 			// 	liStadeSting.push(element.addressLabel);
+// 			// });
+// 			// let adressindex = liStadeSting.indexOf(address.addressLabel);
+// 			// if (adressindex == -1) {
+// 			// 	user.addresses.push(address);
+// 			// } else {
+// 			// 	user.addresses[adressindex] = address;
+// 			// }
+// 			// await UserModel.create(user);
+
 // 			res.send(
-// 				generateTokenReponse(user)
+// 				generateTokenReponse(dbUser)
 // 				// [{
-// 				// 	"db.address": user,
+// 				//     "db.address": user,
 // 				// },
 // 				// { "req.address": req.body }]
 // 			);
-// 			// Só falta agora salvar o req.body no User
 
-// 			// console.log("LS user: ", current_user);
-// 			// console.log("req.body: ", req.body);
-// 			// console.log("req.params: ", req.params);
+// 			// res.send({ message: "deu bom" });
 // 			return;
 // 		} else {
 // 			res.send({ message: "nao tem email assim no banco" });

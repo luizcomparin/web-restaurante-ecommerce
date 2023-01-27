@@ -1,7 +1,7 @@
 <div class="flex justify-center items-center   ">
 	<div class="flex flex-col gap-4  ">
 		<app-title title="Meus dados" class="mt-4"></app-title>
-		<form (change)="getAndUpdateAddress()" [formGroup]="updateForm" (ngSubmit)="submit()" class="">
+		<form (change)="getAndUpdateUser()" [formGroup]="updateForm" (ngSubmit)="submit()" class="">
 
 			<section class="grid grid-cols-3 gap-4 p-4 pt-0 border-b">
 				<!--Informacoes pessoais e de contato-->
@@ -133,7 +133,7 @@
 
 			<default-button text="Salvar"></default-button>
 		</form>
-		<button (click)="getAndUpdateAddress()">get from storage</button>
+		<button (click)="getAndUpdateUser()">get from storage</button>
 		<button (click)="saveToLocalStorage()">save to storage</button>
 
 	</div>
