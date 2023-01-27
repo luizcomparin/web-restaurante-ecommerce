@@ -10,7 +10,7 @@ export interface IAddress {
 	residenceNumber: number;
 }
 
-export interface User {
+export interface IUser {
 	id: string;
 	name: string;
 	cpf: string;
@@ -20,6 +20,8 @@ export interface User {
 	addresses: IAddress[];
 	isAdmin: boolean;
 }
+
+//==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==//
 
 export const AddressSchema = new Schema<IAddress>({
 	addressLabel: String,
@@ -31,7 +33,7 @@ export const AddressSchema = new Schema<IAddress>({
 	residenceNumber: Number,
 });
 
-export const UserSchema = new Schema<User>(
+export const UserSchema = new Schema<IUser>(
 	{
 		name: { type: String, required: true },
 		cpf: { type: String, required: true },
@@ -52,4 +54,4 @@ export const UserSchema = new Schema<User>(
 	}
 );
 
-export const UserModel = model<User>("user", UserSchema);
+export const UserModel = model<IUser>("user", UserSchema);

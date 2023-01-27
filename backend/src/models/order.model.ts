@@ -1,43 +1,45 @@
 import { model, Schema, Types } from "mongoose";
 import { OrderStatusEnum } from "../constants/order_status";
-import { Food, FoodSchema } from "./food.model";
+import { IFood, FoodSchema } from "./food.model";
 import { IAddress } from "./user.model";
 
-export interface LatLng {
+export interface ILatLng {
 	lat: string;
 	lng: string;
 }
 
-export const LatLngSchema = new Schema<LatLng>({
-	lat: { type: String, required: true },
-	lng: { type: String, required: true },
-});
-
-export interface OrderItem {
-	food: Food;
+export interface IOrderItem {
+	food: IFood;
 	price: number;
 	quantity: number;
 }
 
-export const OrderItemSchema = new Schema<OrderItem>({
-	food: { type: FoodSchema, required: true },
-	price: { type: Number, required: true },
-	quantity: { type: Number, required: true },
-});
-
-export interface Order {
+export interface IOrder {
 	id: string;
-	items: OrderItem[];
+	items: IOrderItem[];
 	totalPrice: number;
 	name: string;
 	address: IAddress;
-	addressLatLng: LatLng;
+	addressLatLng: ILatLng;
 	paymentId: string;
 	status: OrderStatusEnum;
 	user: Types.ObjectId;
 	createdAt: Date;
 	updatedAt: Date;
 }
+
+//==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==//
+
+export const LatLngSchema = new Schema<ILatLng>({
+	lat: { type: String, required: true },
+	lng: { type: String, required: true },
+});
+
+export const OrderItemSchema = new Schema<IOrderItem>({
+	food: { type: FoodSchema, required: true },
+	price: { type: Number, required: true },
+	quantity: { type: Number, required: true },
+});
 
 export const AddressSchema = new Schema<IAddress>({
 	addressLabel: { type: String, required: true },
@@ -49,7 +51,7 @@ export const AddressSchema = new Schema<IAddress>({
 	residenceNumber: { type: Number, required: true },
 });
 
-const orderSchema = new Schema<Order>(
+const orderSchema = new Schema<IOrder>(
 	{
 		name: { type: String, required: true },
 		address: { type: AddressSchema, required: true },
