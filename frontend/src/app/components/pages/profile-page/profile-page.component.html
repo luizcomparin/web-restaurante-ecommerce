@@ -1,3 +1,38 @@
+<!--#==#==#==#==#==#==#==#==# DIALOG TEMPLATE #==#==#==#==#==#==#==#==#-->
+
+<ng-template #renameAddressLabel>
+	<div class="flex flex-col justify-center items-center p-4">
+
+		<span class="flex text-xl m-4 font-bold">Renomear endereço</span>
+		<div class="flex flex-col justify-center items-center">
+			<span class="flex text-base text-black font-medium p-4">
+				Novo nome do endereço &nbsp; <span class="text-primary">{{this.addressLabel}}</span>:
+			</span>
+
+			<text-input class="flex m-4 mb-0"
+				[control]="fc.addressLabel"
+				[showErrorsWhen]="false"
+				label="Novo nome"
+				idInput="novonome"
+				(keyup.enter)="changeAddressLabel()"
+				[onChange]="verifyLabelError()">
+				<div class="text-primary text-center h-[1rem] text-[13px] ml-1 " [ngClass]="showLabelError ? 'flex' : 'invisible' ">
+					<!--input-validation-->
+					*Já existe um endereço com este nome
+				</div>
+			</text-input>
+
+		</div>
+		<div>
+			<!-- <button mat-button mat-dialog-close>Ok</button> -->
+			<default-button type="submit" (onClick)="changeAddressLabel()" [widthRem]="9" fontSizeRem="1.2" [heightRem]="3" text="Salvar"></default-button>
+		</div>
+
+	</div>
+</ng-template>
+
+<!--#==#==#==#==#==#==#==#==# PROFILE-PAGE CONTENT #==#==#==#==#==#==#==#==#-->
+
 <div class="flex justify-center items-center   ">
 	<div class="flex flex-col gap-4  ">
 		<app-title title="Meus dados" class="mt-4"></app-title>
@@ -34,21 +69,21 @@
 				<div class=" col-span-3 flex justify-between items-center pt-0 p-0">
 					<span class=" flex text-xl p-4 font-bold ">Endereços de entrega</span>
 					<span class=" flex text-base p-2 font-medium text-primary cursor-pointer hover:font-semibold">Adicionar endereço</span>
-					<span class=" flex text-base p-2 font-medium text-primary cursor-pointer hover:font-semibold">Renomear endereço selecionado</span>
+					<span (click)="openDialog(renameAddressLabel)" class=" flex text-base p-2 font-medium text-primary cursor-pointer hover:font-semibold">Renomear endereço</span>
 				</div>
 
 				<div class=" col-span-3 flex justify-center w-full items-center pt-0 p-0">
 
-					<drag-scroll class=" flex w-fit max-w-[717px] mb-4 ">
-						<mat-button-toggle-group
-							appearance="legacy"
-							[value]="addressLabelList[0]"
-							(change)="toggleAddress($event.value);this.addressLabel = $event.value">
-							<mat-button-toggle disableRipple *ngFor="let address of addressLabelList" [value]="address">
-								{{ address }}
-							</mat-button-toggle>
-						</mat-button-toggle-group>
-					</drag-scroll>
+					<!-- <drag-scroll class=" flex w-fit max-w-[717px] mb-4 !overflow-hidden"> -->
+					<mat-button-toggle-group #myElement
+						appearance="legacy"
+						[value]="addressLabel"
+						(change)="this.addressLabel = $event.value;toggleAddress($event.value)">
+						<mat-button-toggle disableRipple *ngFor="let address of addressLabelList" [value]="address">
+							{{ address }}
+						</mat-button-toggle>
+					</mat-button-toggle-group>
+					<!-- </drag-scroll> -->
 
 				</div>
 				<!-- <text-input
@@ -133,8 +168,8 @@
 
 			<default-button text="Salvar"></default-button>
 		</form>
-		<button (click)="getAndUpdateUser()">get from storage</button>
-		<button (click)="saveToLocalStorage()">save to storage</button>
+		<button (click)="getAndUpdateUser()">getAndUpdateUser()</button>
+		<button (click)="saveToLocalStorage()">saveToLocalStorage()</button>
 
 	</div>
 </div>

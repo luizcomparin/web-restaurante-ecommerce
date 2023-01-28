@@ -18,6 +18,8 @@ export class DefaultButtonComponent {
 	fontSizeRem = '1.3';
 	@Input()
 	widthRem = 12;
+	@Input()
+	heightRem = 3.5;
 
 	@Output()
 	onClick = new EventEmitter();

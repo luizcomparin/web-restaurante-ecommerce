@@ -6,6 +6,7 @@ const VALIDATORS_MESSAGES: any = {
 	email: 'Email inválido',
 	minlength: 'Insira mais caracteres',
 	notMatch: 'A senha está diferente',
+	duplicatedLabel: 'Já existe um endereço com este nome',
 };
 
 @Component({
@@ -20,9 +21,10 @@ export class TextInputComponent implements OnInit, OnChanges {
 	@Input() type: 'text' | 'password' | 'email' = 'text';
 	@Input() idInput!: string; // Id do objeto para relacionamento do label
 	@Input() hideableValue: boolean = false; // Define se o input vai ter o olhinho pra ocultar o valor
+	@Input() onChange: any;
 
 	hidden: boolean = true;
-	showError: boolean = false;
+	@Input() showError: boolean = false;
 	errorMessages: string[] = [];
 
 	ngOnInit(): void {

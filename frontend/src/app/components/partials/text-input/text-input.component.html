@@ -2,10 +2,11 @@
 	<!--container-->
 	<div class="flex relative items-center px-2 border-[1px]  rounded-xl" [ngClass]="showError ? 'border-primary' : 'border-[#e0e0e0]' ">
 		<!--content-->
-		<input [id]="idInput" [type]="type" [formControl]="formControl" placeholder=" " autocomplete="off" />
+		<input [id]="idInput" [type]="type" [formControl]="formControl" placeholder=" " (change)="onChange" autocomplete="off" />
 		<label [for]="idInput"> {{ label }} </label>
 		<i *ngIf="hideableValue" (click)="hideValue()" [ngClass]="hidden ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash'" class="p-2 cursor-pointer"></i>
 	</div>
+	<ng-content></ng-content>
 
 	<div class="text-primary text-center h-[1rem] text-[13px] ml-1 " [ngClass]="showError ? 'flex' : 'invisible' ">
 		<!--input-validation-->

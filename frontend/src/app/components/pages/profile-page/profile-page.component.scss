@@ -3,8 +3,13 @@
 	border-width: 0px;
 	gap: 1rem;
 	box-shadow: none;
-	// overflow: scroll;
-	overflow: hidden;
+	overflow: auto;
+	overflow-y: hidden;
+
+	display: flex;
+	max-width: 717px;
+	width: fit-content;
+	margin-bottom: 1rem;
 }
 
 .mat-button-toggle{

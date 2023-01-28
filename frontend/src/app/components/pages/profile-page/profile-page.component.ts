@@ -6,6 +6,8 @@ import { IAddress } from 'src/app/shared/interfaces/IAddress';
 import { IUserUpdate } from 'src/app/shared/interfaces/IUserUpdate';
 import { User } from 'src/app/shared/models/User';
 import { PasswordsMatchValidator } from 'src/app/shared/validators/password_match_valitador';
+import { MatDialog } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
 	selector: 'app-profile-page',
@@ -17,7 +19,9 @@ export class ProfilePageComponent implements OnInit {
 		private userService: UserService,
 		private formBuilder: FormBuilder,
 		private activatedRoute: ActivatedRoute,
-		private router: Router
+		private router: Router,
+		private matDialog: MatDialog,
+		private toastrService: ToastrService
 	) {}
 
 	ngOnInit(): void {
@@ -36,7 +40,7 @@ export class ProfilePageComponent implements OnInit {
 		return this.updateForm.controls;
 	}
 
-	// toggleAddress() (address selector) variables
+	// toggleAddress() variables
 	addressLabelList: string[] = this.userService.currentUser.addresses.map(
 		(value) => value.addressLabel
 	);
@@ -44,7 +48,8 @@ export class ProfilePageComponent implements OnInit {
 
 	// Form variables
 	updateForm!: FormGroup;
-	addressLabel!: string;
+	addressLabel: string = this.addressLabelList[0];
+	showLabelError: boolean = false;
 
 	get oldUserData(): User {
 		return JSON.parse(localStorage.getItem('User')!);
@@ -59,7 +64,7 @@ export class ProfilePageComponent implements OnInit {
 		const formValue = this.updateForm.value;
 
 		return {
-			addressLabel: formValue.addressLabel,
+			addressLabel: this.selectedAddress.addressLabel,
 			zipCode: formValue.zipCode,
 			state: formValue.state,
 			city: formValue.city,
@@ -172,7 +177,7 @@ export class ProfilePageComponent implements OnInit {
 					this.selectedAddress.residenceNumber,
 					Validators.required,
 				],
-				addressLabel: [this.addressLabel, Validators.required],
+				addressLabel: [''],
 			},
 			{
 				validators: PasswordsMatchValidator(
@@ -191,10 +196,71 @@ export class ProfilePageComponent implements OnInit {
 
 	//==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==//
 
+	openDialog(ngTemplate: any) {
+		this.matDialog.open(ngTemplate, {
+			// height: 'auto',
+			width: 'fit-content',
+			// disableClose: true,
+			autoFocus: true,
+		});
+	}
+
+	closeDialog() {
+		this.matDialog.closeAll();
+	}
+
+	//==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==//
+
+	verifyLabelError() {
+		const formValue = this.updateForm.value;
+
+		if (this.addressLabelList.includes(formValue.addressLabel)) {
+			this.showLabelError = true;
+		} else this.showLabelError = false;
+	}
+
+	changeAddressLabel() {
+		const formValue = this.updateForm.value;
+
+		this.verifyLabelError();
+
+		if (formValue.addressLabel != '' && this.showLabelError != true) {
+			this.selectedAddress.addressLabel = formValue.addressLabel;
+
+			this.addressLabelList = this.currentUserData.addresses.map(
+				(value) => value.addressLabel
+			);
+
+			this.updatedAddress();
+
+			this.toggleAddress(this.selectedAddress.addressLabel);
+
+			this.closeDialog();
+
+			// console.log(
+			// 	'selected addressLabel: ',
+			// 	this.selectedAddress.addressLabel
+			// );
+			// console.log(
+			// 	'currentUserData.addresses: ',
+			// 	this.currentUserData.addresses
+			// );
+			// console.log('this.addressLabelList: ', this.addressLabelList);
+			// console.log('this.selectedAddress: ', this.selectedAddress);
+			// console.log('this.updatedUser(): ', this.updatedUser());
+		}
+	}
+
+	//==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==//
+
 	submit() {
 		this.isSubmitted = true;
 		if (this.updateForm.invalid) {
-			console.log('Form inválido. Campos faltando ou valores inválidos.');
+			this.toastrService.clear();
+			this.toastrService.error(
+				'Form inválido. Campos faltando ou valores inválidos.',
+				'Falha na atualização.'
+			);
 			return;
 		}
 
