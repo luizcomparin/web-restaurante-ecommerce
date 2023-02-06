@@ -1,28 +1,26 @@
-// import { AbstractControl } from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 
-// export const DuplicatedLabelValidator = (
-// 	passwordControlName: string,
-// 	confirmPasswordControlName: string
-// ) => {
-// 	const validator = (form: AbstractControl) => {
-// 		const passwordControl = form.get(passwordControlName);
-// 		const confirmPasswordControl = form.get(confirmPasswordControlName);
+export const DuplicatedLabelValidator = (
+	addressLabelControlName: string,
+	addressLabelList: string[],
+	selectedAddressLabel?: string
+) => {
+	const validator = (form: AbstractControl) => {
+		const addressLabelControl = form.get(addressLabelControlName);
+		// const addressLabelList = form.get(addressLabelListName);
 
-// 		if (!passwordControl || !confirmPasswordControl) return;
+		if (!addressLabelControl || !addressLabelList) return;
 
-// 		if (passwordControl.value !== confirmPasswordControl.value) {
-// 			confirmPasswordControl.setErrors({ notMatch: true });
-// 		} else {
-// 			const errors = confirmPasswordControl.errors;
-// 			if (!errors) return;
+		if (selectedAddressLabel == addressLabelControl.value) return;
 
-// 			delete errors.notMatch;
-// 			confirmPasswordControl.setErrors(errors);
-// 		}
-// 	};
+		if (addressLabelList.includes(addressLabelControl.value)) {
+			addressLabelControl.setErrors({ duplicatedLabel: true });
+		} else {
+			if (!addressLabelControl.errors) return;
+			delete addressLabelControl.errors.duplicatedLabel;
+			addressLabelControl.setErrors(addressLabelControl.errors);
+		}
+	};
 
-// 	return validator;
-// };
-
-//	TODO ========== Ciar validador de addressLabel duplicado para usar na criação de novo endereço
-//	na tela de perfil
+	return validator;
+};
