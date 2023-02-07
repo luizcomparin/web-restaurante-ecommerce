@@ -8,6 +8,7 @@ import { User } from 'src/app/shared/models/User';
 import { PasswordsMatchValidator } from 'src/app/shared/validators/password_match_valitador';
 import { MatDialog } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
+import { DuplicatedLabelValidator } from 'src/app/shared/validators/addressLabelDuplicate_validator';
 
 @Component({
 	selector: 'app-profile-page',
@@ -33,12 +34,9 @@ export class ProfilePageComponent implements OnInit {
 	}
 
 	isSubmitted = false;
+	labelSaveButtonClicked = false;
+	newAddressButtonClicked = false;
 	returnUrl = '';
-
-	// Alias for HTML
-	get fc() {
-		return this.updateForm.controls;
-	}
 
 	// toggleAddress() variables
 	addressLabelList: string[] = this.userService.currentUser.addresses.map(
@@ -48,6 +46,7 @@ export class ProfilePageComponent implements OnInit {
 
 	// Form variables
 	updateForm!: FormGroup;
+	newAddressForm!: FormGroup;
 	addressLabel: string = this.addressLabelList[0];
 	showLabelError: boolean = false;
 
@@ -57,26 +56,35 @@ export class ProfilePageComponent implements OnInit {
 
 	currentUserData: User = this.oldUserData;
 
+	// Alias for HTML
+	get updateFormControls() {
+		return this.updateForm.controls;
+	}
+
+	get newAddressFormControls() {
+		return this.newAddressForm.controls;
+	}
+
 	//==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==//
 
-	// Simply returns the updated selectedAddress
+	// Returns the updated selectedAddress
 	updatedAddress(): IAddress {
-		const formValue = this.updateForm.value;
+		const updateForm = this.updateForm.value;
 
 		return {
 			addressLabel: this.selectedAddress.addressLabel,
-			zipCode: formValue.zipCode,
-			state: formValue.state,
-			city: formValue.city,
-			district: formValue.district,
-			street: formValue.street,
-			residenceNumber: formValue.residenceNumber,
+			zipCode: updateForm.zipCode,
+			state: updateForm.state,
+			city: updateForm.city,
+			district: updateForm.district,
+			street: updateForm.street,
+			residenceNumber: updateForm.residenceNumber,
 		};
 	}
 
 	//==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==//
 
-	// Simply returns the updated currentUser
+	// Returns the updated currentUser
 	updatedUser(): IUserUpdate {
 		return {
 			oldEmail: this.oldUserData.email,
@@ -90,30 +98,32 @@ export class ProfilePageComponent implements OnInit {
 
 	//==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==//
 
+	// Runs everytime a form field is modified
 	getAndUpdateUser(): User {
-		const user = this.currentUserData;
-		const formValue = this.updateForm.value;
+		const currentUserData = this.currentUserData;
+		const updateForm = this.updateForm.value;
 
-		user.name = formValue.name;
-		user.cpf = formValue.cpf;
-		user.email = formValue.email;
-		user.cellphone = formValue.cellphone;
+		currentUserData.name = updateForm.name;
+		currentUserData.cpf = updateForm.cpf;
+		currentUserData.email = updateForm.email;
+		currentUserData.cellphone = updateForm.cellphone;
 
-		user.addresses = user.addresses.map((address) => {
+		currentUserData.addresses = currentUserData.addresses.map((address) => {
 			if (address.addressLabel === this.addressLabel) {
 				// return { ...address, street: 'new street' };
 				return this.updatedAddress();
 			}
 			return address;
 		});
-		console.log('Updated User: ', user);
+		console.log('Updated User: ', currentUserData);
 		console.log('currentUserData: ', this.currentUserData);
 		console.log('updatedUser(): ', this.updatedUser());
-		return user;
+		return currentUserData;
 	}
 
 	//==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==//
 
+	// Responsible for switching and updating displayed address when mat-button-toggle is clicked
 	toggleAddress(address: string = this.addressLabelList[0]) {
 		this.addressLabel = address;
 		// console.log(
@@ -140,6 +150,93 @@ export class ProfilePageComponent implements OnInit {
 		// console.log('currentUserData: ', this.currentUserData);
 
 		this.createUpdateForm();
+	}
+
+	//==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==//
+
+	changeAddressLabel() {
+		const updateForm = this.updateForm.value;
+		this.labelSaveButtonClicked = true;
+
+		if (updateForm.addressLabel != '' && !this.updateForm.invalid) {
+			this.selectedAddress.addressLabel = updateForm.addressLabel;
+
+			this.addressLabelList = this.currentUserData.addresses.map(
+				(value) => value.addressLabel
+			);
+
+			this.updatedAddress();
+
+			this.toggleAddress(this.selectedAddress.addressLabel);
+
+			this.closeDialog();
+
+			// console.log(
+			// 	'selected addressLabel: ',
+			// 	this.selectedAddress.addressLabel
+			// );
+			// console.log(
+			// 	'currentUserData.addresses: ',
+			// 	this.currentUserData.addresses
+			// );
+			// console.log('this.addressLabelList: ', this.addressLabelList);
+			// console.log('this.selectedAddress: ', this.selectedAddress);
+			// console.log('this.updatedUser(): ', this.updatedUser());
+		}
+	}
+
+	//==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==//
+
+	addNewAddress() {
+		const newAddressForm = this.newAddressForm.value;
+		this.isSubmitted = true;
+
+		if (newAddressForm.addressLabel != '' && !this.newAddressForm.invalid) {
+			const newAddress = {
+				addressLabel: newAddressForm.addressLabel,
+				zipCode: newAddressForm.zipCode,
+				state: newAddressForm.state,
+				city: newAddressForm.city,
+				district: newAddressForm.district,
+				street: newAddressForm.street,
+				residenceNumber: newAddressForm.residenceNumber,
+			};
+
+			this.addressLabelList.push(newAddress.addressLabel);
+
+			this.currentUserData.addresses.push(newAddress);
+
+			this.selectedAddress = newAddress;
+
+			console.log('currentUserAddress: ', this.currentUserData.addresses);
+
+			this.updatedAddress();
+
+			this.toggleAddress(this.selectedAddress.addressLabel);
+
+			this.closeDialog();
+		}
+
+		console.log('updateForm: ', this.updateForm.value);
+	}
+
+	//==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==//
+
+	deleteAddress() {
+		this.currentUserData.addresses.forEach((element, index) => {
+			if (element.addressLabel == this.selectedAddress.addressLabel) {
+				this.currentUserData.addresses.splice(index, 1);
+
+				this.addressLabelList.splice(index, 1);
+			}
+		});
+
+		console.log(this.currentUserData.addresses);
+		console.log(this.addressLabelList);
+
+		this.toggleAddress(this.currentUserData.addresses[0].addressLabel);
+
+		this.closeDialog();
 	}
 
 	//==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==//
@@ -177,84 +274,71 @@ export class ProfilePageComponent implements OnInit {
 					this.selectedAddress.residenceNumber,
 					Validators.required,
 				],
-				addressLabel: [''],
+				addressLabel: [
+					this.selectedAddress.addressLabel,
+					Validators.required,
+				],
 			},
 			{
-				validators: PasswordsMatchValidator(
-					'password',
-					'confirmPassword'
-				),
+				validators: [
+					PasswordsMatchValidator('password', 'confirmPassword'),
+					DuplicatedLabelValidator(
+						'addressLabel',
+						this.addressLabelList,
+						this.selectedAddress.addressLabel
+					),
+				],
 			}
 		);
 	}
 
 	//==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==//
 
-	saveToLocalStorage() {
-		localStorage.setItem('User', JSON.stringify(this.getAndUpdateUser()));
+	// This is called when button "Adicionar endereço" is clicked
+	addNewAddressForm() {
+		this.isSubmitted = false;
+
+		this.newAddressForm = this.formBuilder.group(
+			{
+				zipCode: ['', [Validators.required, Validators.minLength(8)]],
+				state: ['', Validators.required],
+				city: ['', Validators.required],
+				district: ['', Validators.required],
+				street: ['', Validators.required],
+				residenceNumber: ['', Validators.required],
+				addressLabel: ['', Validators.required],
+			},
+			{
+				validators: [
+					DuplicatedLabelValidator(
+						'addressLabel',
+						this.addressLabelList
+					),
+				],
+			}
+		);
 	}
 
 	//==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==//
 
 	openDialog(ngTemplate: any) {
 		this.matDialog.open(ngTemplate, {
-			// height: 'auto',
 			width: 'fit-content',
-			// disableClose: true,
 			autoFocus: true,
 		});
 	}
 
 	closeDialog() {
 		this.matDialog.closeAll();
-	}
-
-	//==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==//
-
-	verifyLabelError() {
-		const formValue = this.updateForm.value;
-
-		if (this.addressLabelList.includes(formValue.addressLabel)) {
-			this.showLabelError = true;
-		} else this.showLabelError = false;
-	}
-
-	changeAddressLabel() {
-		const formValue = this.updateForm.value;
-
-		this.verifyLabelError();
-
-		if (formValue.addressLabel != '' && this.showLabelError != true) {
-			this.selectedAddress.addressLabel = formValue.addressLabel;
-
-			this.addressLabelList = this.currentUserData.addresses.map(
-				(value) => value.addressLabel
-			);
-
-			this.updatedAddress();
-
-			this.toggleAddress(this.selectedAddress.addressLabel);
-
-			this.closeDialog();
-
-			// console.log(
-			// 	'selected addressLabel: ',
-			// 	this.selectedAddress.addressLabel
-			// );
-			// console.log(
-			// 	'currentUserData.addresses: ',
-			// 	this.currentUserData.addresses
-			// );
-			// console.log('this.addressLabelList: ', this.addressLabelList);
-			// console.log('this.selectedAddress: ', this.selectedAddress);
-			// console.log('this.updatedUser(): ', this.updatedUser());
-		}
+		this.labelSaveButtonClicked = false;
+		this.isSubmitted = false;
 	}
 
 	//==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==#==//
 
 	submit() {
 		this.isSubmitted = true;
+
 		if (this.updateForm.invalid) {
 			this.toastrService.clear();
 			this.toastrService.error(

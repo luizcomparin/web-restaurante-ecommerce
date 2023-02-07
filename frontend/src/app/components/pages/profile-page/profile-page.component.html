@@ -1,36 +1,3 @@
-<!--#==#==#==#==#==#==#==#==# DIALOG TEMPLATE #==#==#==#==#==#==#==#==#-->
-
-<ng-template #renameAddressLabel>
-	<div class="flex flex-col justify-center items-center p-4">
-
-		<span class="flex text-xl m-4 font-bold">Renomear endereço</span>
-		<div class="flex flex-col justify-center items-center">
-			<span class="flex text-base text-black font-medium p-4">
-				Novo nome do endereço &nbsp; <span class="text-primary">{{this.addressLabel}}</span>:
-			</span>
-
-			<text-input class="flex m-4 mb-0"
-				[control]="fc.addressLabel"
-				[showErrorsWhen]="false"
-				label="Novo nome"
-				idInput="novonome"
-				(keyup.enter)="changeAddressLabel()"
-				[onChange]="verifyLabelError()">
-				<div class="text-primary text-center h-[1rem] text-[13px] ml-1 " [ngClass]="showLabelError ? 'flex' : 'invisible' ">
-					<!--input-validation-->
-					*Já existe um endereço com este nome
-				</div>
-			</text-input>
-
-		</div>
-		<div>
-			<!-- <button mat-button mat-dialog-close>Ok</button> -->
-			<default-button type="submit" (onClick)="changeAddressLabel()" [widthRem]="9" fontSizeRem="1.2" [heightRem]="3" text="Salvar"></default-button>
-		</div>
-
-	</div>
-</ng-template>
-
 <!--#==#==#==#==#==#==#==#==# PROFILE-PAGE CONTENT #==#==#==#==#==#==#==#==#-->
 
 <div class="flex justify-center items-center   ">
@@ -42,21 +9,21 @@
 				<!--Informacoes pessoais e de contato-->
 				<span class="col-span-3 text-xl p-4 font-bold ">Informações pessoais e de contato</span>
 				<text-input
-					[control]="fc.name"
+					[control]="updateFormControls.name"
 					[showErrorsWhen]="isSubmitted"
 					label="Nome"
 					idInput="nome">
 				</text-input>
 
 				<text-input
-					[control]="fc.cpf"
+					[control]="updateFormControls.cpf"
 					[showErrorsWhen]="isSubmitted"
 					label="CPF"
 					idInput="cpf">
 				</text-input>
 
 				<text-input
-					[control]="fc.cellphone"
+					[control]="updateFormControls.cellphone"
 					[showErrorsWhen]="isSubmitted"
 					label="Celular"
 					idInput="celular">
@@ -68,7 +35,7 @@
 				<!--Endereco de entrega-->
 				<div class=" col-span-3 flex justify-between items-center pt-0 p-0">
 					<span class=" flex text-xl p-4 font-bold ">Endereços de entrega</span>
-					<span class=" flex text-base p-2 font-medium text-primary cursor-pointer hover:font-semibold">Adicionar endereço</span>
+					<span (click)="openDialog(createNewAddress);addNewAddressForm()" class=" flex text-base p-2 font-medium text-primary cursor-pointer hover:font-semibold">Adicionar endereço</span>
 					<span (click)="openDialog(renameAddressLabel)" class=" flex text-base p-2 font-medium text-primary cursor-pointer hover:font-semibold">Renomear endereço</span>
 				</div>
 
@@ -79,57 +46,61 @@
 						appearance="legacy"
 						[value]="addressLabel"
 						(change)="this.addressLabel = $event.value;toggleAddress($event.value)">
-						<mat-button-toggle disableRipple *ngFor="let address of addressLabelList" [value]="address">
+						<mat-button-toggle disableRipple *ngFor="let address of addressLabelList" [value]="address" class="relative">
 							{{ address }}
+							<!-- <span class="absolute top-0 right-0 translate-x-2 -translate-y-2 bg-primary p-1 text-sm font-bold rounded-full text-center justify-center items-center w-[24px] h-[24px]">x</span> -->
+							<div *ngIf="(this.selectedAddress.addressLabel == address && this.addressLabelList.length > 1)">
+								<mat-icon (click)="openDialog(deleteAddressDialog)" fontIcon="cancel" class="absolute top-0 right-0 translate-x-2 -translate-y-2 text-primary hover:text-red-800 rounded-full"></mat-icon>
+							</div>
 						</mat-button-toggle>
 					</mat-button-toggle-group>
 					<!-- </drag-scroll> -->
 
 				</div>
 				<!-- <text-input
-					[control]="fc.addressLabel"
+					[control]="updateFormControls.addressLabel"
 					[showErrorsWhen]="isSubmitted"
 					label="Nome do endereço"
 					idInput="addressLabel">
 				</text-input> -->
 
 				<text-input
-					[control]="fc.zipCode"
+					[control]="updateFormControls.zipCode"
 					[showErrorsWhen]="isSubmitted"
 					label="CEP"
 					idInput="cep">
 				</text-input>
 
 				<text-input
-					[control]="fc.state"
+					[control]="updateFormControls.state"
 					[showErrorsWhen]="isSubmitted"
 					label="Estado"
 					idInput="estado">
 				</text-input>
 
 				<text-input
-					[control]="fc.city"
+					[control]="updateFormControls.city"
 					[showErrorsWhen]="isSubmitted"
 					label="Cidade"
 					idInput="cidade">
 				</text-input>
 
 				<text-input
-					[control]="fc.district"
+					[control]="updateFormControls.district"
 					[showErrorsWhen]="isSubmitted"
 					label="Bairro"
 					idInput="bairro">
 				</text-input>
 
 				<text-input
-					[control]="fc.street"
+					[control]="updateFormControls.street"
 					[showErrorsWhen]="isSubmitted"
 					label="Rua"
 					idInput="rua">
 				</text-input>
 
 				<text-input
-					[control]="fc.residenceNumber"
+					[control]="updateFormControls.residenceNumber"
 					[showErrorsWhen]="isSubmitted"
 					label="Numero"
 					idInput="numero">
@@ -140,7 +111,7 @@
 				<!--Credenciais-->
 				<span class="col-span-3 text-xl p-4 font-bold ">Credenciais</span>
 				<text-input
-					[control]="fc.email"
+					[control]="updateFormControls.email"
 					[showErrorsWhen]="isSubmitted"
 					label="Email"
 					type="email"
@@ -148,7 +119,7 @@
 				</text-input>
 
 				<!-- <text-input
-					[control]="fc.password"
+					[control]="updateFormControls.password"
 					[showErrorsWhen]="isSubmitted"
 					label="Senha"
 					type="password"
@@ -157,7 +128,7 @@
 				</text-input>
 
 				<text-input
-					[control]="fc.confirmPassword"
+					[control]="updateFormControls.confirmPassword"
 					[showErrorsWhen]="isSubmitted"
 					label="Confirmar Senha"
 					type="password"
@@ -169,7 +140,134 @@
 			<default-button text="Salvar"></default-button>
 		</form>
 		<button (click)="getAndUpdateUser()">getAndUpdateUser()</button>
-		<button (click)="saveToLocalStorage()">saveToLocalStorage()</button>
 
 	</div>
 </div>
+
+<!--#==#==#==#==#==#==#==#==# RENAME ADDRESS LABEL DIALOG #==#==#==#==#==#==#==#==#-->
+
+<ng-template #renameAddressLabel>
+	<div class="flex flex-col justify-center items-center p-4">
+
+		<span class="flex text-xl m-4 font-bold">Renomear endereço</span>
+		<!-- Title -->
+		<div class="flex flex-col justify-center items-center">
+			<span class="flex text-base text-black font-medium p-4">
+				Novo nome do endereço &nbsp; <span class="text-primary">{{this.addressLabel}}</span>:
+			</span>
+
+			<text-input class="flex m-4 mb-0"
+				[control]="updateFormControls.addressLabel"
+				[showErrorsWhen]="labelSaveButtonClicked"
+				label="Novo nome"
+				idInput="novonome"
+				(keyup.enter)="changeAddressLabel()">
+			</text-input>
+
+		</div>
+		<div class="flex flex-col">
+			<default-button type="submit" (onClick)="changeAddressLabel()" [widthRem]="9" fontSizeRem="1.2" [heightRem]="3" text="Salvar"></default-button>
+			<span class="text-base font-medium p-2 text-primary cursor-pointer text-center hover:bg-slate-600/5 rounded-lg" mat-dialog-close>Voltar</span>
+		</div>
+
+	</div>
+</ng-template>
+
+<!--#==#==#==#==#==#==#==#==# NEW ADDRESS DIALOG #==#==#==#==#==#==#==#==#-->
+
+<ng-template #createNewAddress>
+	<form [formGroup]="newAddressForm" (ngSubmit)="addNewAddress()" class="">
+		<div class="flex flex-col justify-center items-center p-4">
+
+			<span class="flex text-xl m-4 font-bold">Adicionar novo endereço</span>
+			<!-- Title -->
+
+			<div class="flex flex-col justify-center items-center pt-0 p-0">
+				<!--Endereco de entrega-->
+				<span class=" flex text-base p-4 font-medium ">Digite a rua e número</span>
+				<!-- <text-input
+				[control]="newAddressFormControls.addressLabel"
+				[showErrorsWhen]="isSubmitted"
+				label="Auto Complete do Google"
+				idInput="google">
+			</text-input> -->
+			</div>
+
+			<section class=" grid grid-cols-3 gap-4 p-4 border-b max-w-[800px] justify-center items-center">
+				<!--Detalhes do endereco de entrega-->
+
+				<text-input
+					[control]="newAddressFormControls.zipCode"
+					[showErrorsWhen]="isSubmitted"
+					label="CEP"
+					idInput="newcep">
+				</text-input>
+
+				<text-input
+					[control]="newAddressFormControls.state"
+					[showErrorsWhen]="isSubmitted"
+					label="Estado"
+					idInput="newestado">
+				</text-input>
+
+				<text-input
+					[control]="newAddressFormControls.city"
+					[showErrorsWhen]="isSubmitted"
+					label="Cidade"
+					idInput="newcidade">
+				</text-input>
+
+				<text-input
+					[control]="newAddressFormControls.district"
+					[showErrorsWhen]="isSubmitted"
+					label="Bairro"
+					idInput="newbairro">
+				</text-input>
+
+				<text-input
+					[control]="newAddressFormControls.street"
+					[showErrorsWhen]="isSubmitted"
+					label="Rua"
+					idInput="newrua">
+				</text-input>
+
+				<text-input
+					[control]="newAddressFormControls.residenceNumber"
+					[showErrorsWhen]="isSubmitted"
+					label="Numero"
+					idInput="newnumero">
+				</text-input>
+
+				<text-input class="col-span-3 "
+					[control]="newAddressFormControls.addressLabel"
+					[showErrorsWhen]="isSubmitted"
+					label="Dê um nome à este endereço"
+					idInput="newaddressLabel">
+				</text-input>
+			</section>
+			<div class="flex flex-col">
+				<default-button type="submit" [widthRem]="11" fontSizeRem="1.2" [heightRem]="3" text="Salvar endereço"></default-button>
+				<span class="text-base font-medium p-2 text-primary cursor-pointer text-center hover:bg-slate-600/5 rounded-lg" mat-dialog-close>Voltar</span>
+			</div>
+
+		</div>
+	</form>
+</ng-template>
+
+<!--#==#==#==#==#==#==#==#==# DELETE ADDRESS DIALOG #==#==#==#==#==#==#==#==#-->
+
+<ng-template #deleteAddressDialog>
+	<div class="flex flex-col justify-center items-center p-4">
+
+		<span class="flex text-xl m-4 font-bold">Excluir endereço</span>
+		<!-- Title -->
+		<span class="flex text-base text-black font-medium p-4 justify-center items-center">
+			Deseja excluir o endereço &nbsp; <span class="text-primary">{{this.addressLabel}}</span>?
+		</span>
+		<div class="flex flex-col">
+			<default-button type="submit" (onClick)="deleteAddress()" [widthRem]="9" fontSizeRem="1.2" [heightRem]="3" text="Excluir"></default-button>
+			<span class="text-base font-medium p-2 text-primary cursor-pointer text-center hover:bg-slate-600/5 rounded-lg" mat-dialog-close>Voltar</span>
+		</div>
+
+	</div>
+</ng-template>
