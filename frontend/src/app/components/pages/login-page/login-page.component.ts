@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
 	selector: 'app-login-page',
@@ -29,6 +30,9 @@ export class LoginPageComponent implements OnInit {
 		});
 
 		this.returnUrl = this.activatedRoute.snapshot.queryParams.returnUrl;
+		console.log(this.returnUrl);
+
+		console.log(environment.production);
 		// queryParams gets everything after the '?': ?returnUrl=/checkout
 	}
 

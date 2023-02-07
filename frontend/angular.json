@@ -39,7 +39,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/frontend",
+            "outputPath": "../backend/built/public",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -72,9 +72,21 @@
                   "maximumError": "4kb"
                 }
               ],
+			  "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
               "outputHashing": "all"
             },
             "development": {
+				"fileReplacements": [
+					{
+					  "replace": "src/environments/environment.prod.ts",
+					  "with": "src/environments/environment.ts"
+					}
+				  ],
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,

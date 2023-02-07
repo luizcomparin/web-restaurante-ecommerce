@@ -3,7 +3,9 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import {
+	DEV_BASE_URL,
 	USER_LOGIN_URL,
 	USER_REGISTER_URL,
 	USER_UPDATE_URL,
@@ -62,8 +64,8 @@ export class UserService {
 		this.userSubject.next(new User());
 		localStorage.removeItem(USER_KEY);
 		// console.log('URL atual: ' + window.location.href);
-		if (window.location.href != 'http://localhost:4200/cart-page') {
-			window.location.href = 'http://localhost:4200/';
+		if (window.location.href != DEV_BASE_URL + '/cart-page') {
+			this.router.navigate(['/']);
 		} else window.location.reload();
 	}
 
