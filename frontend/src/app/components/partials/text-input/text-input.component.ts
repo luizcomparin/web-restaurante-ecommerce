@@ -5,7 +5,9 @@ const VALIDATORS_MESSAGES: any = {
 	required: 'Campo obrigatório',
 	email: 'Email inválido',
 	minlength: 'Insira mais caracteres',
+	maxlength: 'Insira menos caracteres',
 	notMatch: 'A senha está diferente',
+	zipCodeError: 'O CEP deve ter 8 números',
 	duplicatedLabel: 'Já existe um endereço com este nome',
 };
 
