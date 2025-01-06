@@ -38,73 +38,76 @@
 					<span (click)="openDialog(createNewAddress);addNewAddressForm()" class=" flex text-base p-2 font-medium text-primary cursor-pointer hover:font-semibold">Adicionar endereço</span>
 					<span (click)="openDialog(renameAddressLabel)" class=" flex text-base p-2 font-medium text-primary cursor-pointer hover:font-semibold">Renomear endereço</span>
 				</div>
+				<ng-container *ngIf="addressLabel">
 
-				<div class=" col-span-3 flex justify-center w-full items-center pt-0 p-0">
 
-					<!-- <drag-scroll class=" flex w-fit max-w-[717px] mb-4 !overflow-hidden"> -->
-					<mat-button-toggle-group #myElement
-						appearance="legacy"
-						[value]="addressLabel"
-						(change)="this.addressLabel = $event.value;toggleAddress($event.value)">
-						<mat-button-toggle disableRipple *ngFor="let address of addressLabelList" [value]="address" class="relative">
-							{{ address }}
-							<!-- <span class="absolute top-0 right-0 translate-x-2 -translate-y-2 bg-primary p-1 text-sm font-bold rounded-full text-center justify-center items-center w-[24px] h-[24px]">x</span> -->
-							<div *ngIf="(this.selectedAddress.addressLabel == address && this.addressLabelList.length > 1)">
-								<mat-icon (click)="openDialog(deleteAddressDialog)" fontIcon="cancel" class="absolute top-0 right-0 translate-x-2 -translate-y-2 text-primary hover:text-red-800 rounded-full"></mat-icon>
-							</div>
-						</mat-button-toggle>
-					</mat-button-toggle-group>
-					<!-- </drag-scroll> -->
+					<div class=" col-span-3 flex justify-center w-full items-center pt-0 p-0">
 
-				</div>
-				<!-- <text-input
+						<!-- <drag-scroll class=" flex w-fit max-w-[717px] mb-4 !overflow-hidden"> -->
+						<mat-button-toggle-group #myElement
+							appearance="legacy"
+							[value]="addressLabel"
+							(change)="this.addressLabel = $event.value;toggleAddress($event.value)">
+							<mat-button-toggle disableRipple *ngFor="let address of addressLabelList" [value]="address" class="relative">
+								{{ address }}
+								<!-- <span class="absolute top-0 right-0 translate-x-2 -translate-y-2 bg-primary p-1 text-sm font-bold rounded-full text-center justify-center items-center w-[24px] h-[24px]">x</span> -->
+								<div *ngIf="(this.selectedAddress.addressLabel == address && this.addressLabelList.length > 1)">
+									<mat-icon (click)="openDialog(deleteAddressDialog)" fontIcon="cancel" class="absolute top-0 right-0 translate-x-2 -translate-y-2 text-primary hover:text-red-800 rounded-full"></mat-icon>
+								</div>
+							</mat-button-toggle>
+						</mat-button-toggle-group>
+						<!-- </drag-scroll> -->
+
+					</div>
+					<!-- <text-input
 					[control]="updateFormControls.addressLabel"
 					[showErrorsWhen]="isSubmitted"
 					label="Nome do endereço"
 					idInput="addressLabel">
 				</text-input> -->
 
-				<text-input
-					[control]="updateFormControls.zipCode"
-					[showErrorsWhen]="isSubmitted"
-					label="CEP"
-					idInput="cep">
-				</text-input>
+					<text-input
+						[control]="updateFormControls.zipCode"
+						[showErrorsWhen]="isSubmitted"
+						label="CEP"
+						idInput="cep">
+					</text-input>
 
-				<text-input
-					[control]="updateFormControls.state"
-					[showErrorsWhen]="isSubmitted"
-					label="Estado"
-					idInput="estado">
-				</text-input>
+					<text-input
+						[control]="updateFormControls.state"
+						[showErrorsWhen]="isSubmitted"
+						label="Estado"
+						idInput="estado">
+					</text-input>
 
-				<text-input
-					[control]="updateFormControls.city"
-					[showErrorsWhen]="isSubmitted"
-					label="Cidade"
-					idInput="cidade">
-				</text-input>
+					<text-input
+						[control]="updateFormControls.city"
+						[showErrorsWhen]="isSubmitted"
+						label="Cidade"
+						idInput="cidade">
+					</text-input>
 
-				<text-input
-					[control]="updateFormControls.district"
-					[showErrorsWhen]="isSubmitted"
-					label="Bairro"
-					idInput="bairro">
-				</text-input>
+					<text-input
+						[control]="updateFormControls.district"
+						[showErrorsWhen]="isSubmitted"
+						label="Bairro"
+						idInput="bairro">
+					</text-input>
 
-				<text-input
-					[control]="updateFormControls.street"
-					[showErrorsWhen]="isSubmitted"
-					label="Rua"
-					idInput="rua">
-				</text-input>
+					<text-input
+						[control]="updateFormControls.street"
+						[showErrorsWhen]="isSubmitted"
+						label="Rua"
+						idInput="rua">
+					</text-input>
 
-				<text-input
-					[control]="updateFormControls.residenceNumber"
-					[showErrorsWhen]="isSubmitted"
-					label="Numero"
-					idInput="numero">
-				</text-input>
+					<text-input
+						[control]="updateFormControls.residenceNumber"
+						[showErrorsWhen]="isSubmitted"
+						label="Numero"
+						idInput="numero">
+					</text-input>
+				</ng-container>
 			</section>
 
 			<section class="grid grid-cols-3 gap-4 p-4 border-b">

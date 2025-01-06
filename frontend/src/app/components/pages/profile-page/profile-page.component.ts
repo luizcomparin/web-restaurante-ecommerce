@@ -23,7 +23,7 @@ export class ProfilePageComponent implements OnInit {
 		private router: Router,
 		private matDialog: MatDialog,
 		private toastrService: ToastrService
-	) {}
+	) { }
 
 	ngOnInit(): void {
 		this.oldUserData;
@@ -263,19 +263,19 @@ export class ProfilePageComponent implements OnInit {
 				// password: ['', [Validators.required, Validators.minLength(5)]],
 				// confirmPassword: ['', Validators.required],
 				zipCode: [
-					this.selectedAddress.zipCode,
+					this.selectedAddress?.zipCode || '',
 					[Validators.required, Validators.minLength(8)],
 				],
-				state: [this.selectedAddress.state, Validators.required],
-				city: [this.selectedAddress.city, Validators.required],
-				district: [this.selectedAddress.district, Validators.required],
-				street: [this.selectedAddress.street, Validators.required],
+				state: [this.selectedAddress?.state || '', Validators.required],
+				city: [this.selectedAddress?.city || '', Validators.required],
+				district: [this.selectedAddress?.district || '', Validators.required],
+				street: [this.selectedAddress?.street || '', Validators.required],
 				residenceNumber: [
-					this.selectedAddress.residenceNumber,
+					this.selectedAddress?.residenceNumber || '',
 					Validators.required,
 				],
 				addressLabel: [
-					this.selectedAddress.addressLabel,
+					this.selectedAddress?.addressLabel || '',
 					Validators.required,
 				],
 			},
@@ -285,7 +285,7 @@ export class ProfilePageComponent implements OnInit {
 					DuplicatedLabelValidator(
 						'addressLabel',
 						this.addressLabelList,
-						this.selectedAddress.addressLabel
+						this.selectedAddress?.addressLabel || ''
 					),
 				],
 			}
